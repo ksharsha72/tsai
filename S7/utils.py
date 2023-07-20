@@ -51,7 +51,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         loss.backward()
         optimizer.step()
 
-        pLabels = torch.argmax(output, dim=1)
+        pLabels = torch.argmax(output, axis=1)
         acc += (pLabels == target).sum().item() / (len(target))
         acc1 += (pLabels == target).sum().item()
         processed += len(target)
@@ -79,7 +79,7 @@ def test(model, device, test_loader):
 
             output = model(data)
             loss += F.nll_loss(output, target, reduction="sum")
-            pred = torch.argmax(output, dim=1)
+            pred = torch.argmax(output, axis=1)
             acc += (pred == output).sum().item()
         test_acc.append((acc / len(test_loader.dataset)) * 100)
         test_loss = loss / (len(test_loader.dataset))
