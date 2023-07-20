@@ -44,6 +44,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
     for batch_idx, (data, target) in enumerate(tqdm(train_loader)):
         optimizer.zero_grad()
         print(data.shape)
+        print(target.shape)
         if device != (None or "cpu"):
             data, target = data.to(device), target.to(device)
         output = model(data)
