@@ -41,7 +41,8 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
     acc1 = 0
     loss = 0
     processed = 0
-    for batch_idx, (data, target) in enumerate(tqdm(train_loader)):
+    pbar = tqdm(train_loader)
+    for batch_idx, (data, target) in enumerate(pbar):
         optimizer.zero_grad()
         if device != (None or "cpu"):
             data, target = data.to(device), target.to(device)
@@ -61,7 +62,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
     train_acc1.append(acc1)
     train_loss.append(loss / len(train_loader.dataset))
 
-    tqdm.set_description(
+    pbar.set_description(
         desc=f"Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*acc/processed:0.2f}"
     )
 
