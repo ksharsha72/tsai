@@ -46,9 +46,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         optimizer.zero_grad()
         if device != (None or "cpu"):
             data, target = data.to(device), target.to(device)
-        print(target.shape)
         output = model(data)
-        print(output.shape)
         loss = F.nll_loss(output, target)
         loss.backward()
         optimizer.step()
@@ -78,12 +76,9 @@ def test(model, device, test_loader):
         for batch_idx, (data, target) in enumerate(tqdm(test_loader)):
             if device != (None or "cpu"):
                 data, target = data.to(device), target.to(device)
-            print(target.shape)
             output = model(data)
-            print(output.shape)
             loss += F.nll_loss(output, target, reduction="sum")
-            print("*****************************************")
             pred = torch.argmax(output, axis=1)
-            acc += (pred == output).sum().item()
+            acc += (pred == target).sum().item()
         test_acc.append((acc / len(test_loader.dataset)) * 100)
         test_loss = loss / (len(test_loader.dataset))
