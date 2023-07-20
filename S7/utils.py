@@ -51,7 +51,9 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         loss.backward()
         optimizer.step()
 
-        pLabels = torch.argmax(output, axis=0)
+        pLabels = torch.argmax(output, axis=1)
+        print(pLabels.shape)
+        print(target.shape)
         acc += (pLabels == target).sum().item() / (len(target))
         acc1 += (pLabels == target).sum().item()
         processed += len(target)
