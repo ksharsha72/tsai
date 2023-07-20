@@ -46,7 +46,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         if device != (None or "cpu"):
             data, target = data.to(device), target.to(device)
         output = model(data)
-        loss += F.nll_loss(output, target, reduce="sum")
+        loss = F.nll_loss(output, target)
         loss.backward()
         optimizer.step()
 
