@@ -43,9 +43,11 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
     processed = 0
     for batch_idx, (data, target) in enumerate(tqdm(train_loader)):
         optimizer.zero_grad()
+        print(data.shape)
         if device != (None or "cpu"):
             data, target = data.to(device), target.to(device)
         output = model(data)
+        print(output.shape)
         loss = F.nll_loss(output, target)
         loss.backward()
         optimizer.step()
