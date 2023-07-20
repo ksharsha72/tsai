@@ -82,6 +82,7 @@ def test(model, device, test_loader):
             output = model(data)
             print(output.shape)
             loss += F.nll_loss(output, target, reduction="sum")
+            print("*****************************************")
             pred = torch.argmax(output, axis=1)
             acc += (pred == output).sum().item()
         test_acc.append((acc / len(test_loader.dataset)) * 100)
