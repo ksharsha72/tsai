@@ -8,12 +8,12 @@ train_transforms = transforms.Compose(
     [
         transforms.RandomRotation((-7, 7), fill=(0,)),
         transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081)),
+        transforms.Normalize((0.1307,), (0.3081,)),
     ]
 )
 
 test_transforms = transforms.Compose(
-    [transforms.ToTensor(), transforms.Normalize((0.1307, 0.3081))]
+    [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
 )
 
 
