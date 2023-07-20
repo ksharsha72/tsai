@@ -73,7 +73,7 @@ def test(model, device, test_loader):
     loss = 0
     processed = 0
     with torch.no_grad():
-        for batch_idx, (data, target) in tqdm(test_loader):
+        for batch_idx, (data, target) in enumerate(tqdm(test_loader)):
             if device != (None or "cpu"):
                 data, target = data.to(device), target.to(device)
 
