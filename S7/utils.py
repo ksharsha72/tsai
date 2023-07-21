@@ -52,24 +52,19 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         optimizer.step()
 
         pLabels = torch.argmax(output, axis=1)
-        acc += (pLabels == target).sum().item() / len(target)
-        print("individual acc", acc)
-        acc1 += (pLabels == target).sum().item()
+        acc += (pLabels == target).sum().item()
         processed += len(target)
         epoch_loss += loss.item()
-    acc1 = acc1 / processed * 100
-    acc = acc * 100
-    print("The acc", acc)
+        pbar.set_description(
+            desc=f"Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*acc/processed:0.2f}"
+        )
+
+    acc = acc / processed * 100
     train_acc.append(acc)
-    train_acc1.append(acc1)
     train_loss.append(epoch_loss / len(train_loader.dataset))
 
-    pbar.set_description(
-        desc=f"Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*acc/processed:0.2f}"
-    )
 
-
-def test(model, device, test_loader):
+def test(model, device, test_loader, epoch):
     model.eval()
     acc = 0
     loss = 0
@@ -84,3 +79,5 @@ def test(model, device, test_loader):
             acc += (pred == target).sum().item()
         test_acc.append((acc / len(test_loader.dataset)) * 100)
         test_loss = loss / (len(test_loader.dataset))
+
+        print("The Test Accuracy is", test_acc[epoch])
