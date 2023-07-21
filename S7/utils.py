@@ -56,6 +56,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         print(pLabels == target)
         print((pLabels == target).sum().item())
         acc += (pLabels == target).sum().item() / (len(target))
+        print("************************************")
         print(f"{batch_idx}" + str(acc))
         acc1 += (pLabels == target).sum().item()
         processed += len(target)
