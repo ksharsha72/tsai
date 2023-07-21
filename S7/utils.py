@@ -39,7 +39,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
     model.train()
     acc = 0
     acc1 = 0
-    loss = 0
+    epoch_loss = 0
     processed = 0
     pbar = tqdm(train_loader)
     for batch_idx, (data, target) in enumerate(pbar):
@@ -48,27 +48,23 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
             data, target = data.to(device), target.to(device)
         output = model(data)
         loss = F.nll_loss(output, target)
-        loss1 = F.nll_loss(output, target, reduction="none")
-        print("here in the train loss")
-        print(f"{batch_idx}" + str({loss}))
-        print(loss.shape)
-        print(f"{batch_idx}" + str({loss1}))
-        print(f"{batch_idx}" + str({len(loss1)}))
-        print(loss1.shape)
         loss.backward()
         optimizer.step()
 
         pLabels = torch.argmax(output, axis=1)
+        print("getting the accuracy correctly")
+        print(pLabels == target)
         acc += (pLabels == target).sum().item() / (len(target))
         print(f"{batch_idx}" + str(acc))
         acc1 += (pLabels == target).sum().item()
         processed += len(target)
         # processed += len(data)
+        epoch_loss += loss.item()
     acc1 = acc1 / processed * 100
     acc = acc
     train_acc.append(acc)
     train_acc1.append(acc1)
-    train_loss.append(loss / len(train_loader.dataset))
+    train_loss.append(epoch_loss / len(train_loader.dataset))
 
     pbar.set_description(
         desc=f"Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*acc/processed:0.2f}"
@@ -86,9 +82,6 @@ def test(model, device, test_loader):
                 data, target = data.to(device), target.to(device)
             output = model(data)
             loss += F.nll_loss(output, target, reduction="sum")
-            print("********* here in the test loss ************")
-            print(f"{batch_idx}" + str(loss))
-            print(loss.shape)
             pred = torch.argmax(output, axis=1)
             acc += (pred == target).sum().item()
         test_acc.append((acc / len(test_loader.dataset)) * 100)
