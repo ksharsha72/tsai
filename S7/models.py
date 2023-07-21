@@ -121,8 +121,8 @@ class Model4(nn.Module):
             nn.Conv2d(12, 14, 3), nn.ReLU(), nn.BatchNorm2d(14), nn.Dropout(0.15)
         )
 
-        self.transition_block2 = nn.Conv2d(14, 12, 1)
-        self.block5 = nn.Sequential(nn.Conv2d(12, 10, 3), nn.ReLU())
+        self.transition_block2 = nn.Conv2d(14, 10, 1)
+        self.block5 = nn.Sequential(nn.Conv2d(10, 10, 3), nn.ReLU())
         self.pool2 = nn.AvgPool2d(6)
 
     def forward(self, x):
