@@ -80,4 +80,4 @@ def test(model, device, test_loader, epoch):
         test_acc.append((acc / len(test_loader.dataset)) * 100)
         test_loss = loss / (len(test_loader.dataset))
 
-        print("The Test Accuracy is", test_acc[epoch])
+        print("The Test Accuracy is", test_acc[epoch - 1])
