@@ -121,8 +121,8 @@ class Model4(nn.Module):
             nn.Conv2d(12, 14, 3), nn.ReLU(), nn.BatchNorm2d(14), nn.Dropout(0.15)
         )
 
-        self.transition_block2 = nn.Conv2d(14, 10, 1)
-        self.block5 = nn.Sequential(nn.Conv2d(10, 10, 3), nn.ReLU())
+        self.block5 = nn.Sequential(nn.Conv2d(14, 16, 3), nn.ReLU())
+        self.transition_block2 = nn.Conv2d(16, 10, 1)
         self.pool2 = nn.AvgPool2d(6)
 
     def forward(self, x):
@@ -131,7 +131,7 @@ class Model4(nn.Module):
         x = self.pool1(self.transition_block1(x))
         x = self.block3(x)
         x = self.block4(x)
-        x = self.transition_block2(x)
-        x = self.pool2(self.block5(x))
+        x = self.block5(x)
+        x = self.pool2(self.transition_block2(x))
         x = x.view(-1, 10)
         return F.log_softmax(x, dim=1)
