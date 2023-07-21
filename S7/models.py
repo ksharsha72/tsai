@@ -71,7 +71,7 @@ class Model3(nn.Module):
         )
 
         self.block2 = nn.Sequential(
-            nn.Conv2d(16, 14, 3), nn.BatchNorm2d(14), nn.Dropout(0.1)
+            nn.Conv2d(16, 12, 3), nn.BatchNorm2d(12), nn.Dropout(0.1)
         )
         self.transition_block1 = nn.Conv2d(12, 16, 1)
         self.pool1 = nn.MaxPool2d(2, 2)
