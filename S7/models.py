@@ -77,11 +77,11 @@ class Model3(nn.Module):
         self.pool1 = nn.MaxPool2d(2, 2)
 
         self.block3 = nn.Sequential(
-            nn.Conv2d(14, 12, 3), nn.BatchNorm2d(12), nn.Dropout(0.1)
+            nn.Conv2d(14, 10, 3), nn.BatchNorm2d(12), nn.Dropout(0.1)
         )
 
         self.block4 = nn.Sequential(
-            nn.Conv2d(12, 8, 3), nn.BatchNorm2d(8), nn.Dropout(0.1)
+            nn.Conv2d(10, 8, 3), nn.BatchNorm2d(8), nn.Dropout(0.1)
         )
 
         self.block5 = nn.Conv2d(8, 10, 1)
