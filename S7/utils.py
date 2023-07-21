@@ -52,6 +52,8 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         print("here in the train loss")
         print(f"{batch_idx}" + str({loss}))
         print(loss.shape)
+        print(f"{batch_idx}" + str({loss1}))
+        print(loss1.shape)
         loss.backward()
         optimizer.step()
 
