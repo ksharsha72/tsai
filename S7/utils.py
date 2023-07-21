@@ -53,6 +53,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
 
         pLabels = torch.argmax(output, axis=1)
         acc += (pLabels == target).sum().item() / len(target)
+        print("individual acc", acc)
         acc1 += (pLabels == target).sum().item()
         processed += len(target)
         epoch_loss += loss.item()
