@@ -48,7 +48,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
             data, target = data.to(device), target.to(device)
         output = model(data)
         loss = F.nll_loss(output, target)
-        loss1 = F.nll_loss(output, target, reduction="sum")
+        loss1 = F.nll_loss(output, target, reduction="none")
         print("here in the train loss")
         print(f"{batch_idx}" + str({loss}))
         print(f"{batch_idx}" + str({len(loss)}))
