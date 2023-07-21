@@ -7,7 +7,7 @@ from torchvision import transforms
 
 train_transforms = transforms.Compose(
     [
-        transforms.RandomRotation((-7, 7), fill=(0,)),
+        transforms.RandomRotation((-7, 7)),
         transforms.ToTensor(),
         transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
     ]
