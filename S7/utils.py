@@ -3,6 +3,8 @@ from torchsummary import summary
 from tqdm import tqdm
 import torch
 import torch.nn.functional as F
+import numpy as np
+import matplotlib.pyplot as plt
 
 train_transforms = transforms.Compose(
     [
@@ -82,3 +84,10 @@ def test(model, device, test_loader, epoch):
         test_loss = loss / (len(test_loader.dataset))
 
         print("The Test Accuracy is", test_acc[epoch - 1])
+
+
+def display_img(img):
+    img = img / 2 + 0.5
+    npimg = img.numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.show()
