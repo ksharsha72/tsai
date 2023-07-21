@@ -18,6 +18,7 @@ test_transforms = transforms.Compose(
 
 
 def get_summary(model, set_device=False, input_size=(1, 28, 28)):
+    device = None
     if set_device:
         is_cuda = torch.cuda.is_available()
         print(is_cuda)
