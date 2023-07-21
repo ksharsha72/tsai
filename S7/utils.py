@@ -55,6 +55,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         print("getting the accuracy correctly")
         print(pLabels == target)
         print((pLabels == target).sum().item())
+        print((pLabels == target).sum().item() / len(target))
         acc += (pLabels == target).sum().item() / (len(target))
         print("************************************")
         print(f"{batch_idx} :" + str(acc))
