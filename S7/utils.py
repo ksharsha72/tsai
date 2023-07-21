@@ -6,8 +6,6 @@ import torch.nn.functional as F
 
 train_transforms = transforms.Compose(
     [
-        transforms.RandomCrop(24),
-        transforms.Resize(28),
         transforms.RandomRotation((-7, 7), fill=(0,)),
         transforms.ToTensor(),
         transforms.Normalize((0.1307,), (0.3081,)),
