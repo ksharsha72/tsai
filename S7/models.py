@@ -38,7 +38,7 @@ class Model2(nn.Module):
     def __init__(self):
         super(Model2, self).__init__()
         self.block1 = nn.Sequential(
-            nn.Conv2d(1, 16, 3), nn.BatchNorm2d(12), nn.Dropout(0.1)
+            nn.Conv2d(1, 16, 3), nn.BatchNorm2d(16), nn.Dropout(0.1)
         )
 
         self.block2 = nn.Sequential(
