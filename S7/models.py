@@ -74,18 +74,18 @@ class Model3(nn.Module):
             nn.Conv2d(16, 12, 3), nn.BatchNorm2d(12), nn.Dropout(0.15)
         )
 
+        self.transition_block1 = nn.Conv2d(12, 24, 1)
         self.pool1 = nn.MaxPool2d(2, 2)
-        self.transition_block1 = nn.Conv2d(12, 20, 1)
 
         self.block3 = nn.Sequential(
-            nn.Conv2d(20, 16, 3), nn.BatchNorm2d(16), nn.Dropout(0.15)
+            nn.Conv2d(24, 12, 3), nn.BatchNorm2d(12), nn.Dropout(0.15)
         )
 
         self.block4 = nn.Sequential(
-            nn.Conv2d(16, 12, 3), nn.BatchNorm2d(12), nn.Dropout(0.15)
+            nn.Conv2d(12, 14, 3), nn.BatchNorm2d(14), nn.Dropout(0.15)
         )
 
-        self.block5 = nn.Conv2d(12, 10, 3)
+        self.block5 = nn.Conv2d(14, 10, 3)
         self.pool2 = nn.AvgPool2d(6)
 
     def forward(self, x):
