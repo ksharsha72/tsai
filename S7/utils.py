@@ -52,7 +52,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         optimizer.step()
 
         pLabels = torch.argmax(output, axis=1)
-        acc += (pLabels == target).sum().item() / (len(target))
+        acc += (pLabels == target).sum().item() / len(target)
         acc1 += (pLabels == target).sum().item()
         processed += len(target)
         epoch_loss += loss.item()
