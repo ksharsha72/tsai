@@ -54,6 +54,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         pLabels = torch.argmax(output, axis=1)
         print("getting the accuracy correctly")
         print(pLabels == target)
+        print((pLabels == target).sum().item())
         acc += (pLabels == target).sum().item() / (len(target))
         print(f"{batch_idx}" + str(acc))
         acc1 += (pLabels == target).sum().item()
