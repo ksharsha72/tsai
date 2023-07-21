@@ -52,19 +52,13 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         optimizer.step()
 
         pLabels = torch.argmax(output, axis=1)
-        print("getting the accuracy correctly")
-        print(pLabels == target)
-        print((pLabels == target).sum().item())
-        print((pLabels == target).sum().item() / len(target))
         acc += (pLabels == target).sum().item() / (len(target))
-        print("************************************")
-        print(f"{batch_idx} :" + str(acc))
         acc1 += (pLabels == target).sum().item()
         processed += len(target)
-        # processed += len(data)
         epoch_loss += loss.item()
     acc1 = acc1 / processed * 100
-    acc = acc
+    acc = acc * 100
+    print("The acc", acc)
     train_acc.append(acc)
     train_acc1.append(acc1)
     train_loss.append(epoch_loss / len(train_loader.dataset))
