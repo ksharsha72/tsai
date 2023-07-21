@@ -48,16 +48,20 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
             data, target = data.to(device), target.to(device)
         output = model(data)
         loss = F.nll_loss(output, target)
+        print("here in the loss")
+        print(loss)
+        print(loss.shape)
         loss.backward()
         optimizer.step()
 
         pLabels = torch.argmax(output, axis=1)
         acc += (pLabels == target).sum().item() / (len(target))
+        print(acc)
         acc1 += (pLabels == target).sum().item()
         processed += len(target)
         # processed += len(data)
     acc1 = acc1 / processed * 100
-    acc = acc * 100
+    acc = acc
     train_acc.append(acc)
     train_acc1.append(acc1)
     train_loss.append(loss / len(train_loader.dataset))
