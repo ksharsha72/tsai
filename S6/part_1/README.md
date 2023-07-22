@@ -6,7 +6,7 @@ The above screen shot is the excel file showing the differentiation with each an
 
 The differentiation with every variable with other dependent variables are calculated and kept in differentaion_with_every_variable.xlsx
 
-##The Probelm
+## The Probelm
 
 ![Screenshot (11)](https://github.com/ksharsha72/tsai/assets/90446031/bd572310-a4c8-4519-a1de-5f74ab45d463)
 
