@@ -159,7 +159,7 @@ class Model5(nn.Module):
             nn.Conv2d(12, 14, 3), nn.ReLU(), nn.BatchNorm2d(14), nn.Dropout(0.05)
         )
 
-        self.block5 = nn.Sequential(nn.Conv2d(14, 11, 3), nn.ReLU())
+        self.block5 = nn.Sequential(nn.Conv2d(14, 11, 3), nn.BatchNorm2d(11), nn.ReLU())
         self.transition_block2 = nn.Conv2d(11, 10, 1)
         self.pool2 = nn.AvgPool2d(6)
 
