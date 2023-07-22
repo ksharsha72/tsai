@@ -141,22 +141,22 @@ class Model5(nn.Module):
     def __init__(self):
         super(Model5, self).__init__()
         self.block1 = nn.Sequential(
-            nn.Conv2d(1, 16, 3), nn.ReLU(), nn.BatchNorm2d(16), nn.Dropout(0.1)
+            nn.Conv2d(1, 16, 3), nn.ReLU(), nn.BatchNorm2d(16), nn.Dropout(0.05)
         )
 
         self.block2 = nn.Sequential(
-            nn.Conv2d(16, 12, 3), nn.ReLU(), nn.BatchNorm2d(12), nn.Dropout(0.1)
+            nn.Conv2d(16, 12, 3), nn.ReLU(), nn.BatchNorm2d(12), nn.Dropout(0.05)
         )
 
         self.transition_block1 = nn.Conv2d(12, 24, 1)
         self.pool1 = nn.MaxPool2d(2, 2)
 
         self.block3 = nn.Sequential(
-            nn.Conv2d(24, 12, 3), nn.ReLU(), nn.BatchNorm2d(12), nn.Dropout(0.1)
+            nn.Conv2d(24, 12, 3), nn.ReLU(), nn.BatchNorm2d(12), nn.Dropout(0.05)
         )
 
         self.block4 = nn.Sequential(
-            nn.Conv2d(12, 14, 3), nn.ReLU(), nn.BatchNorm2d(14), nn.Dropout(0.1)
+            nn.Conv2d(12, 14, 3), nn.ReLU(), nn.BatchNorm2d(14), nn.Dropout(0.05)
         )
 
         self.block5 = nn.Sequential(nn.Conv2d(14, 11, 3), nn.ReLU())
