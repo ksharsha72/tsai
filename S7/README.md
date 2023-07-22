@@ -1,6 +1,7 @@
 The MODEL5 in FINAL_S7.ipynb refers to MODEL5 in models.py , and same restructured to MODEL6 in model_3.py
 # Findings
 
+
 Speaking of the Final Model
 The usage of droput to 0.05 really helped
 and reducing the batch size to 64 helped me in achieving the accuarcy of 99.4 twice
