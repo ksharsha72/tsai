@@ -1,4 +1,4 @@
-#Part 1
+# Part 1
 
 ![Screenshot (2)](https://github.com/ksharsha72/tsai/assets/90446031/f76c41d2-31f3-479f-ad31-a923075d865f)
 
