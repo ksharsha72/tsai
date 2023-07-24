@@ -8,9 +8,9 @@ import torch.nn.functional as F
 class Block(nn.Module):
     def __init__(
         self,
-        norm="bn",
         in_ch=3,
         out_ch=4,
+        norm="bn",
         kernel_size=3,
         padding=1,
         group_size=2,
@@ -51,23 +51,24 @@ class Block(nn.Module):
         if usepool:
             self.pool = nn.MaxPool2d(2, 2)
 
-    # def __call__(self, x, num_layers):
-    #     x = self.conv1(x)
-    #     x = F.relu(x)
-    #     x = self.n1(x)
-    #     if num_layers >= 2:
-    #         x = self.conv2(x)
-    #         x = F.relu(x)
-    #         x = self.n2(x)
-    #     if num_layers >= 3:
-    #         x = self.conv3(x)
-    #         x = F.relu(x)
-    #         x = self.n2(x)
-    #     if self.usepool:
-    #         x = self.pool(x)
-    #     return x
+    def __call__(self, x, num_layers):
+        x = self.conv1(x)
+        x = F.relu(x)
+        x = self.n1(x)
+        if num_layers >= 2:
+            x = self.conv2(x)
+            x = F.relu(x)
+            x = self.n2(x)
+        if num_layers >= 3:
+            x = self.conv3(x)
+            x = F.relu(x)
+            x = self.n2(x)
+        if self.usepool:
+            x = self.pool(x)
+        return x
 
 
 class CIFARnet(nn.Module):
     def __init__(self, *args, **kwargs) -> None:
         super(CIFARnet, self).__init__(*args, **kwargs)
+        self.layer1 = Block()

@@ -1,6 +1,7 @@
-from typing import Any
+from typing import Any, Optional
 import torch
 import torch.nn as nn
+from torch.nn.parameter import Parameter
 import torch.optim as optim
 import torch.nn.functional as F
 
