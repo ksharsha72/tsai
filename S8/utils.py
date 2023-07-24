@@ -45,6 +45,7 @@ incorrect_data = []
 original_target = []
 layer_weights = []
 layers = []
+org_data = []
 
 
 def train(model, device, train_loader, optimizer, epoch, **kwargs):
@@ -104,11 +105,11 @@ def test(model, device, test_loader, epoch):
             print("originals")
             print(pred)
             print(target)
+            org_data.append(data)
 
             original_target.append(
                 target[torch.where(~(pred == target))[0].cpu().numpy()]
             )
-            data[incorrect_preds]
             incorrect_data.append(data[incorrect_preds[-1]].cpu().numpy())
         print("The Test Accuracy is", test_acc[epoch - 1])
 
