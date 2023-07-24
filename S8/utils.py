@@ -43,6 +43,8 @@ test_acc = []
 incorrect_preds = []
 incorrect_data = []
 original_target = []
+layer_weights = []
+layers = []
 
 
 def train(model, device, train_loader, optimizer, epoch, **kwargs):
@@ -109,26 +111,10 @@ def plot_kernels(model):
         if type(child) == nn.Sequential:
             for child1 in child:
                 if type(child1) == nn.Conv2d:
-                    print("_______________this is true_______________")
-                    print(child1.parameters == child1.weight)
-                    if val > 5:
-                        for idx, param in enumerate(child1.parameters()):
-                            if (idx == 0) and (param.shape[1] <= 3):
-                                for i in range(param.shape[0]):
-                                    plt.imshow(param[i].cpu().detach().numpy())
-                                    plt.show()
-                                    break
-                            elif (idx == 0) and param.shape[1] > 3:
-                                for i in range(param.shape[0]):
-                                    npimg = (
-                                        torch.sum(param[0], 0).cpu().detach().numpy()
-                                    )
-                                    plt.imshow(npimg)
-                                    plt.show()
-                                    break
-                    val = val + 1
-                break
-        break
+                    layer_weights.append(child1.weight)
+                    layers.append(child1)
+
+    print(layer_weights[0].shape)
 
 
 def wrong_predictions():
@@ -141,5 +127,7 @@ def wrong_predictions():
                 print(np_img.shape)
                 np_trans = np.transpose(np_img, (1, 2, 0))
                 ax[i][j].imshow(np_trans)
-                ax[i][j].set_xlabel(f"{incorrect_preds[i+j]} \ f{original_target[i+j]}")
+                ax[i][j].set_xlabel(
+                    f"{incorrect_preds[i+j][0]} | {original_target[i+j][0]}"
+                )
                 fig.show()
