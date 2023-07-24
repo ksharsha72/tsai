@@ -93,9 +93,9 @@ def test(model, device, test_loader, epoch):
         if test_acc[-1] >= sorted(test_acc)[-1]:
             global incorrect_preds, incorrect_data, original_target
             torch.save(model.state_dict(), "./best_model.pth")
-            incorrect_preds.append(pred[~(pred == target)])
-            original_target.append(target[~(pred == target)])
-            incorrect_data.append(data[pred.index])
+            incorrect_preds.append(pred[torch.where(~(pred == target)).numpy()])
+            original_target.append(target[np.where(~(pred == target)).numpy()])
+            incorrect_data.append(data[incorrect_preds[-1]])
         print("The Test Accuracy is", test_acc[epoch - 1])
 
 
