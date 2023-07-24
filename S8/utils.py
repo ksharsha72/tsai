@@ -90,12 +90,12 @@ def test(model, device, test_loader, epoch):
         test_acc.append((acc / len(test_loader.dataset)) * 100)
         test_loss.append(loss / (len(test_loader.dataset)))
 
-        if test_acc[-1] > sorted(test_acc)[-1]:
+        if test_acc[-1] >= sorted(test_acc)[-1]:
             global incorrect_preds, incorrect_data, original_target
             torch.save(model.state_dict(), "./best_model.pth")
-            incorrect_preds = pred[~(pred == target)]
-            original_target = target[~(pred == target)]
-            incorrect_data = data[pred.index]
+            incorrect_preds.append(pred[~(pred == target)])
+            original_target.append(target[~(pred == target)])
+            incorrect_data.append(data[pred.index])
         print("The Test Accuracy is", test_acc[epoch - 1])
 
 
@@ -105,6 +105,8 @@ def plot_kernels(model):
         if type(child) == nn.Sequential:
             for child1 in child:
                 if type(child1) == nn.Conv2d:
+                    print("_______________this is true_______________")
+                    print(child1.parameters == child1.weight)
                     if val > 5:
                         for idx, param in enumerate(child1.parameters()):
                             if (idx == 0) and (param.shape[1] <= 3):
