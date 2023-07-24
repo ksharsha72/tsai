@@ -138,6 +138,7 @@ def wrong_predictions():
         for j in range(5):
             if len(incorrect_data) > 10:
                 np_img = incorrect_data[i + j]
-                np_trans = np.transpose(np_img, (1, 2, 0))
-                ax[i][j].plot(np_trans)
+                print(np_img.shape)
+                # np_trans = np.transpose(np_img, (1, 2, 0))
+                ax[i][j].plot(np_img)
                 ax[i][j].set_xlabel(f"{incorrect_preds[i+j]} \ f{original_target[i+j]}")
