@@ -91,6 +91,7 @@ def test(model, device, test_loader, epoch):
         test_loss.append(loss / (len(test_loader.dataset)))
 
         if test_acc[-1] > sorted(test_acc)[-1]:
+            global incorrect_preds, incorrect_data, original_target
             torch.save(model.state_dict(), "./best_model.pth")
             incorrect_preds = pred[~(pred == target)]
             original_target = target[~(pred == target)]
@@ -106,12 +107,12 @@ def plot_kernels(model):
                     for idx, param in enumerate(child1.parameters()):
                         if (idx == 0) and (param.shape[1] <= 3):
                             for i in range(param.shape[0]):
-                                plt.imshow(param[i].detach().numpy())
+                                plt.imshow(param[i].cpu().detach().numpy())
                                 plt.show()
                                 break
                         elif (idx == 0) and param.shape[1] > 3:
                             for i in range(param.shape[0]):
-                                npimg = torch.sum(param[0], 0).detach().numpy()
+                                npimg = torch.sum(param[0], 0).cpu().detach().numpy()
                                 plt.imshow(npimg)
                                 plt.show()
                                 break
