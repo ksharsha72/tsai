@@ -101,21 +101,26 @@ def test(model, device, test_loader, epoch):
 
 def plot_kernels(model):
     for child in model.children():
+        val = 0
         if type(child) == nn.Sequential:
             for child1 in child:
                 if type(child1) == nn.Conv2d:
-                    for idx, param in enumerate(child1.parameters()):
-                        if (idx == 0) and (param.shape[1] <= 3):
-                            for i in range(param.shape[0]):
-                                plt.imshow(param[i].cpu().detach().numpy())
-                                plt.show()
-                                break
-                        elif (idx == 0) and param.shape[1] > 3:
-                            for i in range(param.shape[0]):
-                                npimg = torch.sum(param[0], 0).cpu().detach().numpy()
-                                plt.imshow(npimg)
-                                plt.show()
-                                break
+                    if val > 5:
+                        for idx, param in enumerate(child1.parameters()):
+                            if (idx == 0) and (param.shape[1] <= 3):
+                                for i in range(param.shape[0]):
+                                    plt.imshow(param[i].cpu().detach().numpy())
+                                    plt.show()
+                                    break
+                            elif (idx == 0) and param.shape[1] > 3:
+                                for i in range(param.shape[0]):
+                                    npimg = (
+                                        torch.sum(param[0], 0).cpu().detach().numpy()
+                                    )
+                                    plt.imshow(npimg)
+                                    plt.show()
+                                    break
+                    val = val + 1
                 break
         break
 
