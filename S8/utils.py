@@ -115,7 +115,7 @@ def plot_kernels(model):
                         if idx == 0:
                             print("param and weight shapes")
                             print(param.shape, child1.weight.shape)
-                            print(param == child)
+                            print(param == child1.weight)
 
 
 def wrong_predictions():
