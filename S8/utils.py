@@ -111,10 +111,11 @@ def plot_kernels(model):
         if type(child) == nn.Sequential:
             for child1 in child:
                 if type(child1) == nn.Conv2d:
-                    layer_weights.append(child1.weight)
-                    layers.append(child1)
-
-    print(layer_weights[0].shape)
+                    for idx, param in enumerate(child1.parameters()):
+                        if idx == 0:
+                            print("param and weight shapes")
+                            print(param.shape, child1.weight.shape)
+                            print(param == child)
 
 
 def wrong_predictions():
@@ -128,6 +129,6 @@ def wrong_predictions():
                 np_trans = np.transpose(np_img, (1, 2, 0))
                 ax[i][j].imshow(np_trans)
                 ax[i][j].set_xlabel(
-                    f"{incorrect_preds[i+j][0]} | {original_target[i+j][0]}"
+                    f"{incorrect_preds[i+j][0]}| {original_target[i+j][0]}"
                 )
                 fig.show()
