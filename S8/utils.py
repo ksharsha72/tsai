@@ -96,7 +96,9 @@ def test(model, device, test_loader, epoch):
             incorrect_preds.append(
                 pred[torch.where(~(pred == target))[0].cpu().numpy()]
             )
-            original_target.append(target[np.where(~(pred == target))[0].cpu().numpy()])
+            original_target.append(
+                target[torch.where(~(pred == target))[0].cpu().numpy()]
+            )
             incorrect_data.append(data[incorrect_preds[-1]].cpu().numpy())
         print("The Test Accuracy is", test_acc[epoch - 1])
 
