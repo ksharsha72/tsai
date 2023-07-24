@@ -187,3 +187,4 @@ def wrong_predictions():
             )
             fig.show()
             fig.tight_layout()
+            plt.tight_layout()
