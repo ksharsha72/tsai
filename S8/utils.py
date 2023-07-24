@@ -6,6 +6,7 @@ from torchvision import transforms, datasets
 import torch.nn as nn
 import matplotlib.pyplot as plt
 import numpy as np
+from math import ceil, floor
 
 
 train_transforms = transforms.Compose(
@@ -119,6 +120,45 @@ def test(model, device, test_loader, epoch):
         print("The Test Accuracy is", test_acc[epoch - 1])
 
 
+def show_kernels(param, kernel_size):
+    for i in range(param.shape[0]):
+        x_idx, y_idx = floor(param.shape[0] / 2), ceil(param.shape[0] / 2)
+        plt.subplot(x_idx, y_idx, i + 1)
+        if kernel_size > 3:
+            reshaped_tensor = torch.sum(param[i], axis=0)
+            plt.imshow(reshaped_tensor.cpu().detach().numpy(), cmap="gray")
+        else:
+            plt.imshow(np.transpose(param[i].cpu().detach().numpy(), (1, 2, 0)))
+
+
+# def helper(param):
+#  if param[1] <= 3:
+#     for i in range(param.shape[0]):
+#         x_idx, y_idx = floor(param.shape[0] / 2), ceil(
+#             param.shape[0] / 2
+#         )
+#         plt.subplot(x_idx, y_idx, i + 1)
+#         plt.imshow(
+#             np.transpose(
+#                 param[i].cpu().detach().numpy(), (1, 2, 0)
+#             )
+#         )
+#     else:
+#         for i in range(param.shape[0]):
+#             reshaped_tensor = torch.sum(param[0], axis=0)
+#             x_idx, y_idx = floor(param.shape[0] / 2), ceil(
+#                 param.shape[0] / 2
+#             )
+
+#             plt.subplot(x_idx, y_idx, i + 1)
+#             plt.imshow(
+#                 np.transpose(
+#                     param[i].cpu().detach().numpy(),
+#                     (1, 2, 0),
+#                 )
+#             )
+
+
 def plot_kernels(model):
     for child in model.children():
         val = 0
@@ -127,17 +167,14 @@ def plot_kernels(model):
                 if type(child1) == nn.Conv2d:
                     for idx, param in enumerate(child1.parameters()):
                         if idx == 0:
-                            for i in range(param.shape[0]):
-                                plt.subplot(2, 8, i + 1)
-                                plt.imshow(
-                                    np.transpose(
-                                        param[i].cpu().detach().numpy(), (1, 2, 0)
-                                    )
-                                )
+                            if param[1] <= 3:
+                                show_kernels(param, kernel_size=3)
+                            else:
+                                show_kernels(param, kernel_size=4)
 
 
 def wrong_predictions():
-    fig = plt.figure()
+    fig = plt.figure(figsize=(5, 2))
     ax = fig.subplots(2, 5)
     for i in range(2):
         for j in range(5):
@@ -149,3 +186,4 @@ def wrong_predictions():
                 f"{classes[incorrect_preds[i+j][0]]}| {classes[original_target[i+j][0]]}"
             )
             fig.show()
+            fig.tight_layout()
