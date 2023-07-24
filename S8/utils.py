@@ -2,7 +2,7 @@ import torch
 from tqdm import tqdm
 import torch.nn.functional as F
 from torchsummary import summary
-from torchvision import transforms
+from torchvision import transforms, datasets
 
 
 train_transforms = transforms.Compose(
