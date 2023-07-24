@@ -126,6 +126,13 @@ def plot_kernels(model):
                             print("param and weight shapes")
                             print(param.shape, child1.weight.shape)
                             # print(param == child1.weight)
+                            for i in range(param[0]):
+                                plt.subplot(8, 2, i)
+                                plt.imshow(
+                                    np.transpose(
+                                        param[i].cpu().detach().numpy(), (1, 2, 0)
+                                    )
+                                )
 
 
 def wrong_predictions():
