@@ -123,11 +123,11 @@ def plot_kernels(model):
                 if type(child1) == nn.Conv2d:
                     for idx, param in enumerate(child1.parameters()):
                         if idx == 0:
-                            print("param and weight shapes")
-                            print(param.shape, child1.weight.shape)
+                            # print("param and weight shapes")
+                            # print(param.shape, child1.weight.shape)
                             # print(param == child1.weight)
-                            for i in range(param[0]):
-                                plt.subplot(8, 2, i)
+                            for i in range(param.shape[0]):
+                                plt.subplot(2, 8, i)
                                 plt.imshow(
                                     np.transpose(
                                         param[i].cpu().detach().numpy(), (1, 2, 0)
