@@ -46,6 +46,18 @@ original_target = []
 layer_weights = []
 layers = []
 org_data = []
+classes = (
+    "Airplane",
+    "Automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck",
+)
 
 
 def train(model, device, train_loader, optimizer, epoch, **kwargs):
@@ -100,14 +112,6 @@ def test(model, device, test_loader, epoch):
                 pred[torch.where(~(pred == target))[0].cpu().numpy()]
             )
 
-            print(pred[torch.where(~(pred == target))])
-            print(target[torch.where(~(pred == target))])
-
-            print("originals")
-            print(pred)
-            print(target)
-            org_data.append(data)
-
             original_target.append(
                 target[torch.where(~(pred == target))[0].cpu().numpy()]
             )
@@ -123,11 +127,8 @@ def plot_kernels(model):
                 if type(child1) == nn.Conv2d:
                     for idx, param in enumerate(child1.parameters()):
                         if idx == 0:
-                            # print("param and weight shapes")
-                            # print(param.shape, child1.weight.shape)
-                            # print(param == child1.weight)
                             for i in range(param.shape[0]):
-                                plt.subplot(2, 8, i)
+                                plt.subplot(2, 8, i + 1)
                                 plt.imshow(
                                     np.transpose(
                                         param[i].cpu().detach().numpy(), (1, 2, 0)
@@ -140,12 +141,11 @@ def wrong_predictions():
     ax = fig.subplots(2, 5)
     for i in range(2):
         for j in range(5):
-            if len(incorrect_data) > 10:
-                np_img = incorrect_data[i + j][0]
-                print(np_img.shape)
-                np_trans = np.transpose(np_img, (1, 2, 0))
-                ax[i][j].imshow(np_trans)
-                ax[i][j].set_xlabel(
-                    f"{incorrect_preds[i+j][0]}| {original_target[i+j][0]}"
-                )
-                fig.show()
+            np_img = incorrect_data[i + j][0]
+            print(np_img.shape)
+            np_trans = np.transpose(np_img, (1, 2, 0))
+            ax[i][j].imshow(np_trans)
+            ax[i][j].set_xlabel(
+                f"{classes[incorrect_preds[i+j][0]]}| {classes[original_target[i+j][0]]}"
+            )
+            fig.show()
