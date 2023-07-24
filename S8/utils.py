@@ -167,14 +167,14 @@ def plot_kernels(model):
                 if type(child1) == nn.Conv2d:
                     for idx, param in enumerate(child1.parameters()):
                         if idx == 0:
-                            if param[1] <= 3:
+                            if param.shape[1] <= 3:
                                 show_kernels(param, kernel_size=3)
                             else:
                                 show_kernels(param, kernel_size=4)
 
 
 def wrong_predictions():
-    fig = plt.figure(figsize=(5, 2))
+    fig = plt.figure()
     ax = fig.subplots(2, 5)
     for i in range(2):
         for j in range(5):
