@@ -98,9 +98,17 @@ def test(model, device, test_loader, epoch):
             incorrect_preds.append(
                 pred[torch.where(~(pred == target))[0].cpu().numpy()]
             )
+            print(pred[torch.where(~(pred == target))])
+            print(target[torch.where(~(pred == target))])
+
+            print("originals")
+            print(pred)
+            print(target)
+
             original_target.append(
                 target[torch.where(~(pred == target))[0].cpu().numpy()]
             )
+            data[incorrect_preds]
             incorrect_data.append(data[incorrect_preds[-1]].cpu().numpy())
         print("The Test Accuracy is", test_acc[epoch - 1])
 
@@ -115,7 +123,7 @@ def plot_kernels(model):
                         if idx == 0:
                             print("param and weight shapes")
                             print(param.shape, child1.weight.shape)
-                            print(param == child1.weight)
+                            # print(param == child1.weight)
 
 
 def wrong_predictions():
