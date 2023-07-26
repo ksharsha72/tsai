@@ -20,7 +20,7 @@ class Model(nn.Module):
             nn.Dropout(0.1),
         )
         self.dil1 = nn.Sequential(
-            nn.Conv2d(64, 64, 3, padding=1, dilation=1),
+            nn.Conv2d(64, 64, 3, padding=2, dilation=2),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
@@ -39,7 +39,7 @@ class Model(nn.Module):
             nn.Dropout(0.1),
         )
         self.layer6 = nn.Sequential(
-            nn.Conv2d(64, 32, 3, dilation=1, padding=1),
+            nn.Conv2d(64, 32, 3, dilation=2, padding=2),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
