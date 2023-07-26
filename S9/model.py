@@ -88,8 +88,6 @@ class Model(nn.Module):
         x = self.layer1(x)
         x = self.layer2(x)
         dilout = self.dil1(x)
-        print(dilout.shape)
-        print(self.dw_sep1(x).shape)
         x = dilout + self.dw_sep1(x)
         x = self.layer5(x)
         x = self.layer6(x)
