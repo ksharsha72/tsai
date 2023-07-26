@@ -9,6 +9,27 @@ import numpy as np
 from math import ceil, floor
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+from torch.utils.data import Dataset, DataLoader
+
+
+class CIFAR10(Dataset):
+    def __init__(self, dataset, transforms=None) -> None:
+        self.dataset = dataset
+        self.transfroms = transforms
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        image, label = self.dataset[idx]
+
+        image = np.array(image)
+
+        # Apply Transforms
+        if self.transforms is not None:
+            image = self.transforms(image=image)["image"]
+
+        return (image, label)
 
 
 train_transforms = transforms.Compose(
