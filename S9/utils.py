@@ -32,7 +32,7 @@ class Cifar(Dataset):
         return (image, label)
 
 
-train_transforms = transforms.Compose(
+train_transforms = A.Compose(
     [
         A.ShiftScaleRotate(shift_limit=0.05, scale_limit=0.05, rotate_limit=15, p=0.5),
         A.HorizontalFlip(p=0.5),
@@ -44,7 +44,7 @@ train_transforms = transforms.Compose(
     ]
 )
 
-test_transforms = transforms.Compose(
+test_transforms = A.Compose(
     [
         ToTensorV2(),
         A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
