@@ -67,10 +67,10 @@ class Model(nn.Module):
             nn.ReLU(),
             nn.BatchNorm2d(128),
             nn.Dropout(0.1),
-            nn.Conv2d(128, 48, 1),
+            nn.Conv2d(128, 64, 1),
         )
         self.layer11 = nn.Sequential(
-            nn.Conv2d(48, 32, 3, padding=1),
+            nn.Conv2d(64, 32, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
