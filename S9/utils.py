@@ -126,11 +126,7 @@ def test(model, device, test_loader, epoch):
         for batch_idx, (data, target) in enumerate(tqdm(test_loader)):
             if device != (None or "cpu"):
                 data, target = data.to(device), target.to(device)
-            print("------------------------------")
-            print(target.shape)
             output = model(data)
-            print(output.shape)
-            print("-------------------------------")
             loss += F.nll_loss(output, target, reduction="sum").item()
             pred = torch.argmax(output, dim=1)
             acc += (pred == target).sum().item()
