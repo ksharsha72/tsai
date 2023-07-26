@@ -13,9 +13,9 @@ from torch.utils.data import Dataset, DataLoader
 
 
 class Cifar(Dataset):
-    def __init__(self, dataset, transforms=None) -> None:
+    def __init__(self, dataset, transform=None) -> None:
         self.dataset = dataset
-        self.transfroms = transforms
+        self.transforms = transform
 
     def __len__(self):
         return len(self.dataset)
