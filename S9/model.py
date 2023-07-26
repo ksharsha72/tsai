@@ -20,9 +20,9 @@ class Model(nn.Module):
             nn.Dropout(0.1),
         )
         self.dil1 = nn.Sequential(
-            nn.Conv2d(64, 64, 3, padding=2, dilation=2),
+            nn.Conv2d(64, 32, 3, padding=2, dilation=2),
             nn.ReLU(),
-            nn.BatchNorm2d(64),
+            nn.BatchNorm2d(32),
             nn.Dropout(0.1),
         )
         self.dw_sep1 = nn.Sequential(
@@ -30,22 +30,22 @@ class Model(nn.Module):
             nn.ReLU(),
             nn.BatchNorm2d(128),
             nn.Dropout(0.1),
-            nn.Conv2d(128, 64, 1),
+            nn.Conv2d(128, 32, 1),
         )
         self.layer5 = nn.Sequential(
-            nn.Conv2d(64, 64, 3),
+            nn.Conv2d(32, 48, 3),
+            nn.ReLU(),
+            nn.BatchNorm2d(48),
+            nn.Dropout(0.1),
+        )
+        self.layer6 = nn.Sequential(
+            nn.Conv2d(48, 64, 3, dilation=2, padding=2),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
         )
-        self.layer6 = nn.Sequential(
-            nn.Conv2d(64, 32, 3, dilation=2, padding=2),
-            nn.ReLU(),
-            nn.BatchNorm2d(32),
-            nn.Dropout(0.1),
-        )
         self.layer7 = nn.Sequential(
-            nn.Conv2d(32, 48, 3),
+            nn.Conv2d(64, 48, 3),
             nn.ReLU(),
             nn.BatchNorm2d(48),
             nn.Dropout(0.1),
