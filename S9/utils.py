@@ -12,7 +12,7 @@ from albumentations.pytorch import ToTensorV2
 from torch.utils.data import Dataset, DataLoader
 
 
-class CIFAR10(Dataset):
+class Cifar(Dataset):
     def __init__(self, dataset, transforms=None) -> None:
         self.dataset = dataset
         self.transfroms = transforms
