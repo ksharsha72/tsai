@@ -18,7 +18,7 @@ train_transforms = transforms.Compose(
         A.CoarseDropout(
             max_holes=1, max_height=16, max_width=16, min_height=8, min_width=8
         ),
-        A.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+        A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
         ToTensorV2(),
     ]
 )
@@ -26,7 +26,7 @@ train_transforms = transforms.Compose(
 test_transforms = transforms.Compose(
     [
         ToTensorV2(),
-        A.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+        A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
     ]
 )
 
