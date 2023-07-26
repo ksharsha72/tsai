@@ -39,15 +39,15 @@ train_transforms = A.Compose(
         A.CoarseDropout(
             max_holes=1, max_height=16, max_width=16, min_height=8, min_width=8
         ),
-        A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+        A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ToTensorV2(),
     ]
 )
 
 test_transforms = A.Compose(
     [
+        A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ToTensorV2(),
-        A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
     ]
 )
 
@@ -99,11 +99,7 @@ def train(model, device, train_loader, optimizer, epoch, **kwargs):
         optimizer.zero_grad()
         if device != (None or "cpu"):
             data, target = data.to(device), target.to(device)
-        print("*******************************")
-        print(target.shape)
         output = model(data)
-        print(output.shape)
-        print("*********************************")
         loss = F.nll_loss(output, target)
         loss.backward()
         optimizer.step()
