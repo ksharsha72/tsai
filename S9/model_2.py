@@ -8,54 +8,54 @@ class Model(nn.Module):
     def __init__(self, *args, **kwargs) -> None:
         super(Model, self).__init__(*args, **kwargs)
         self.layer1 = nn.Sequential(
-            nn.Conv2d(3, 32, 3, padding=1),
+            nn.Conv2d(3, 16, 3, padding=1),
             nn.ReLU(),
-            nn.BatchNorm2d(32),
+            nn.BatchNorm2d(16),
             nn.Dropout(0.1),
         )
         self.layer2 = nn.Sequential(
-            nn.Conv2d(32, 64, 3, padding=1),
+            nn.Conv2d(16, 32, 3, padding=1),
             nn.ReLU(),
-            nn.BatchNorm2d(64),
+            nn.BatchNorm2d(32),
             nn.Dropout(0.1),
         )
 
         self.layer3 = nn.Sequential(
-            nn.Conv2d(64, 72, 3, stride=2),
-            nn.ReLU(),
-            nn.BatchNorm2d(72),
-            nn.Dropout(0.1),
-        )
-        self.layer4 = nn.Sequential(
-            nn.Conv2d(72, 56, 3, padding=1),
-            nn.ReLU(),
-            nn.BatchNorm2d(56),
-            nn.Dropout(0.1),
-        )
-        self.layer5 = nn.Sequential(
-            nn.Conv2d(56, 32, 3, padding=1),
-            nn.ReLU(),
-            nn.BatchNorm2d(32),
-            nn.Dropout(0.1),
-        )
-        self.layer6 = nn.Sequential(
             nn.Conv2d(32, 64, 3, stride=2),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
         )
-        self.layer7 = nn.Sequential(
-            nn.Conv2d(64, 32, 3, padding=1),
+        self.layer4 = nn.Sequential(
+            nn.Conv2d(64, 72, 3, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(72),
+            nn.Dropout(0.1),
+        )
+        self.layer5 = nn.Sequential(
+            nn.Conv2d(72, 64, 3, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout(0.1),
+        )
+        self.layer6 = nn.Sequential(
+            nn.Conv2d(64, 32, 3, stride=2),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
         )
-        self.dw_sep1 = nn.Sequential(
-            nn.Conv2d(32, 64, 3, groups=32, padding=1),
+        self.layer7 = nn.Sequential(
+            nn.Conv2d(32, 64, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
-            nn.Conv2d(64, 48, 1),
+        )
+        self.dw_sep1 = nn.Sequential(
+            nn.Conv2d(64, 32, 3, groups=32, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(0.1),
+            nn.Conv2d(32, 48, 1),
         )
         self.layer9 = nn.Sequential(
             nn.Conv2d(48, 32, 3, stride=2, padding=4),
