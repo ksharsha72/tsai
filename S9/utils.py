@@ -45,21 +45,21 @@ train_transforms = A.Compose(
             min_holes=1,
             fill_value=[0.49139968, 0.48215827, 0.44653124],
         ),
-        ToTensorV2(),
         A.Normalize(
             mean=[0.49139968, 0.48215827, 0.44653124],
             std=[0.24703233, 0.24348505, 0.26158768],
         ),
+        ToTensorV2(),
     ]
 )
 
 test_transforms = A.Compose(
     [
-        ToTensorV2(),
         A.Normalize(
             mean=[0.49139968, 0.48215827, 0.44653124],
             std=[0.24703233, 0.24348505, 0.26158768],
         ),
+        ToTensorV2(),
     ]
 )
 
