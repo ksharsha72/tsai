@@ -92,5 +92,6 @@ class Model(nn.Module):
         x = self.layer10(x)
         x = self.layer11(x)
         x = self.layer12(x)
+        x = self.out(x)
         x = x.view(-1, 10)
         return F.log_softmax(x)
