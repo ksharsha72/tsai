@@ -37,12 +37,6 @@ class Model(nn.Module):
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
         )
-        self.layer4_dil = nn.Sequential(
-            nn.Conv2d(32, 64, 3, padding=2, dilation=2),
-            nn.ReLU(),
-            nn.BatchNorm2d(64),
-            nn.Dropout(0.1),
-        )
         self.layer5 = nn.Sequential(
             nn.Conv2d(64, 72, 3, padding=1),
             nn.ReLU(),
@@ -94,7 +88,7 @@ class Model(nn.Module):
         x = self.layer1(x)
         x = self.layer2(x) + self.layer2_dil(x)
         x = self.layer3(x)
-        x = self.layer4(x) + self.layer4_dil(x)
+        x = self.layer4(x)
         x = self.layer5(x)
         x = self.layer6(x)
         x = self.dw_sep1(x)
