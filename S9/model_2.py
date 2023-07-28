@@ -39,7 +39,7 @@ class Model(nn.Module):
             nn.Dropout(0.1),
         )
         self.layer6 = nn.Sequential(
-            nn.Conv2d(64, 32, 3, stride=2, padding=4),
+            nn.Conv2d(64, 32, 3, stride=2, padding=2),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
@@ -65,20 +65,20 @@ class Model(nn.Module):
             nn.Dropout(0.1),
         )
         self.layer10 = nn.Sequential(
-            nn.Conv2d(32, 36, 3, padding=1),
+            nn.Conv2d(32, 48, 3, padding=1),
             nn.ReLU(),
-            nn.BatchNorm2d(36),
+            nn.BatchNorm2d(48),
             nn.Dropout(0.1),
         )
         self.layer11 = nn.Sequential(
-            nn.Conv2d(36, 56, 3, padding=1),
+            nn.Conv2d(48, 56, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(56),
             nn.Dropout(0.1),
         )
         self.layer12 = nn.Sequential(nn.Conv2d(56, 10, 3, stride=2))
 
-        self.out = nn.AvgPool2d(4)
+        self.out = nn.AvgPool2d(3)
 
     def forward(self, x):
         x = self.layer1(x)
