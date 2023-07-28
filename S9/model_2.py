@@ -77,9 +77,9 @@ class Model(nn.Module):
         )
         self.layer11 = nn.Sequential(
             nn.Conv2d(24, 32, 3, padding=1),
-            nn.ReLU(),
-            nn.BatchNorm2d(32),
-            nn.Dropout(0.1),
+            # nn.ReLU(),
+            # nn.BatchNorm2d(32),
+            # nn.Dropout(0.1),
         )
         self.layer12 = nn.Sequential(nn.Conv2d(32, 10, 3, stride=2))
         self.out = nn.AvgPool2d(2)
