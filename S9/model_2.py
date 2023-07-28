@@ -26,13 +26,13 @@ class Model(nn.Module):
             nn.Dropout(0.1),
         )
         self.layer3 = nn.Sequential(
-            nn.Conv2d(24, 32, 3, stride=2),
+            nn.Conv2d(24, 64, 3, stride=2),
             nn.ReLU(),
-            nn.BatchNorm2d(32),
+            nn.BatchNorm2d(64),
             nn.Dropout(0.1),
         )
         self.layer4 = nn.Sequential(
-            nn.Conv2d(32, 64, 3, padding=1),
+            nn.Conv2d(64, 64, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
