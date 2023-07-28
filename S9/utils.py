@@ -34,7 +34,7 @@ class Cifar(Dataset):
 
 train_transforms = A.Compose(
     [
-        A.ShiftScaleRotate(shift_limit=0.4, scale_limit=0.5, rotate_limit=10, p=0.2),
+        A.ShiftScaleRotate(shift_limit=0.3, scale_limit=0.3, rotate_limit=10, p=0.2),
         A.HorizontalFlip(p=0.2),
         A.CoarseDropout(
             max_holes=1,
@@ -43,6 +43,7 @@ train_transforms = A.Compose(
             min_height=16,
             min_width=16,
             min_holes=1,
+            fill_value=[0.49139968, 0.48215827, 0.44653124],
         ),
         A.Normalize(
             mean=[0.49139968, 0.48215827, 0.44653124],
