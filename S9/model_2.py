@@ -33,11 +33,10 @@ class Model(nn.Module):
             nn.Dropout(0.1),
         )
         self.layer4_dil = nn.Sequential(
-            nn.Conv2d(32, 56, 3, padding=2, dilation=2),
+            nn.Conv2d(32, 64, 3, padding=2, dilation=2),
             nn.ReLU(),
-            nn.BatchNorm2d(56),
+            nn.BatchNorm2d(64),
             nn.Dropout(0.1),
-            nn.Conv2d(56, 64, 1),
         )
         self.layer5 = nn.Sequential(
             nn.Conv2d(64, 72, 3, padding=1),
