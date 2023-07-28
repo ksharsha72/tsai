@@ -55,7 +55,10 @@ train_transforms = A.Compose(
 
 test_transforms = A.Compose(
     [
-        A.Normalize(mean=[], std=[0.24703233, 0.24348505, 0.26158768]),
+        A.Normalize(
+            mean=[0.49139968, 0.48215827, 0.44653124],
+            std=[0.24703233, 0.24348505, 0.26158768],
+        ),
         ToTensorV2(),
     ]
 )
