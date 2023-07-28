@@ -12,10 +12,10 @@ from albumentations.pytorch import ToTensorV2
 from torch.utils.data import Dataset, DataLoader
 
 
-class Cifar(Dataset):
+class CIFAR_10(Dataset):
     def __init__(self, dataset, transform=None) -> None:
         self.dataset = dataset
-        self.transforms = transform
+        self.transform = transform
 
     def __len__(self):
         return len(self.dataset)
@@ -26,8 +26,8 @@ class Cifar(Dataset):
         image = np.array(image)
 
         # Apply Transforms
-        if self.transforms is not None:
-            image = self.transforms(image=image)  # ["image"]
+        if self.transform is not None:
+            image = self.transform(image=image)["image"]
 
         return (image, label)
 
