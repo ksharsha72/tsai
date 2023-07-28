@@ -27,7 +27,7 @@ class Cifar(Dataset):
 
         # Apply Transforms
         if self.transforms is not None:
-            image = self.transforms(image=image)["image"]
+            image = self.transforms(image=image)  # ["image"]
 
         return (image, label)
 
