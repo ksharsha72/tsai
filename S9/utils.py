@@ -37,7 +37,7 @@ train_transforms = A.Compose(
         A.ShiftScaleRotate(shift_limit=0.1, scale_limit=0.1, rotate_limit=15, p=0.2),
         A.HorizontalFlip(p=0.1),
         A.CoarseDropout(
-            max_holes=1, max_height=16, max_width=16, min_height=8, min_width=8
+            max_holes=1, max_height=8, max_width=8, min_height=8, min_width=8
         ),
         A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ToTensorV2(),
