@@ -19,7 +19,12 @@ class Model(nn.Module):
             nn.BatchNorm2d(24),
             nn.Dropout(0.1),
         )
-
+        self.layer2_dil = nn.Sequential(
+            nn.Conv2d(16, 24, 3, padding=1, dilation=2),
+            nn.ReLU(),
+            nn.BatchNorm2d(24),
+            nn.Dropout(0.1),
+        )
         self.layer3 = nn.Sequential(
             nn.Conv2d(24, 32, 3, stride=2),
             nn.ReLU(),
@@ -87,7 +92,7 @@ class Model(nn.Module):
 
     def forward(self, x):
         x = self.layer1(x)
-        x = self.layer2(x)
+        x = self.layer2(x) + self.layer2_dil(x)
         x = self.layer3(x)
         x = self.layer4(x) + self.layer4_dil(x)
         x = self.layer5(x)
