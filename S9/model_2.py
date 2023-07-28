@@ -44,21 +44,22 @@ class Model(nn.Module):
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
         )
-        self.layer7 = nn.Sequential(
+        self.dw_sep1 = nn.Sequential(
+            nn.Conv2d(32, 64, 3, groups=32, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout(0.1),
+            nn.Conv2d(64, 32, 1),
+        )
+        self.layer8 = nn.Sequential(
             nn.Conv2d(32, 64, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
         )
-        self.dw_sep1 = nn.Sequential(
-            nn.Conv2d(64, 32, 3, groups=2, padding=1),
-            nn.ReLU(),
-            nn.BatchNorm2d(32),
-            nn.Dropout(0.1),
-            nn.Conv2d(32, 48, 1),
-        )
+
         self.layer9 = nn.Sequential(
-            nn.Conv2d(48, 32, 3, stride=2, padding=4),
+            nn.Conv2d(64, 32, 3, stride=2, padding=4),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
@@ -86,8 +87,8 @@ class Model(nn.Module):
         x = self.layer4(x)
         x = self.layer5(x)
         x = self.layer6(x)
-        x = self.layer7(x)
         x = self.dw_sep1(x)
+        x = self.layer8(x)
         x = self.layer9(x)
         x = self.layer10(x)
         x = self.layer11(x)
