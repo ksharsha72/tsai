@@ -51,7 +51,7 @@ class Model(nn.Module):
             nn.Dropout(0.1),
         )
         self.dw_sep1 = nn.Sequential(
-            nn.Conv2d(64, 32, 3, groups=16, padding=1),
+            nn.Conv2d(64, 32, 3, groups=2, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
