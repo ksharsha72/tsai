@@ -7,21 +7,15 @@ class Net(nn.Module):
     def __init__(self, *args, **kwargs) -> None:
         super(Net, self).__init__(*args, **kwargs)
         self.layer1 = nn.Sequential(
-            nn.Conv2d(3, 32, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(3, 32, 3),
             nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
         self.layer2 = nn.Sequential(
-            nn.Conv2d(32, 64, 3, dilation=2, padding=2, padding_mode="reflect"),
+            nn.Conv2d(32, 64, 3),
             nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.Dropout(0.1),
-        )
-        self.layer2_1 = nn.Sequential(
-            nn.Conv2d(32, 64, 3, padding=1, padding_mode="reflect"),
-            nn.ReLU(),
-            nn.BatchNorm2d(64),
             nn.Dropout(0.1),
         )
 
@@ -61,6 +55,13 @@ class Net(nn.Module):
             nn.Dropout(0.1),
         )
 
+        self.layer7_2 = nn.Sequential(
+            nn.Conv2d(24, 36, 3, dilation=2, padding=2, padding_mode="reflect"),
+            nn.BatchNorm2d(36),
+            nn.ReLU(),
+            nn.Dropout(0.1),
+        )
+
         self.layer8 = nn.Sequential(
             nn.Conv2d(36, 56, 3, padding=1, padding_mode="reflect"),
             nn.BatchNorm2d(56),
@@ -69,7 +70,7 @@ class Net(nn.Module):
         )
 
         self.layer9 = nn.Sequential(
-            nn.Conv2d(56, 32, 3, stride=2, padding=4, padding_mode="reflect"),
+            nn.Conv2d(56, 32, 3, stride=2, padding=2, padding_mode="reflect"),
             nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.Dropout(0.1),
@@ -90,24 +91,27 @@ class Net(nn.Module):
         )
 
         self.layer12 = nn.Sequential(
-            nn.Conv2d(24, 10, 3, stride=2),
+            nn.Conv2d(24, 16, 3, stride=2),
         )
 
-        self.gap = nn.AvgPool2d(4)
+        self.gap = nn.AvgPool2d(2)
+
+        self.fc = nn.Linear(16, 10)
 
     def forward(self, x):
         x = self.layer1(x)
-        x = self.layer2(x) + self.layer2_1(x)
+        x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
         x = self.layer5(x)
         x = self.layer6(x)
-        x = self.layer7(x)
+        x = self.layer7(x) + self.layer7_2(x)
         x = self.layer8(x)
         x = self.layer9(x)
         x = self.layer10(x)
         x = self.layer11(x)
         x = self.layer12(x)
         x = self.gap(x)
-        x = x.view(-1, 10)
+        x = x.view(-1, 16)
+        x = self.fc(x)
         return F.log_softmax(x)
