@@ -64,28 +64,12 @@ class Net(nn.Module):
         )
 
         self.layer9 = nn.Sequential(
-            nn.Conv2d(56, 32, 3, stride=2, padding=2),
-        )
-
-        self.layer10 = nn.Sequential(
-            nn.Conv2d(32, 48, 3, padding=1),
-            nn.BatchNorm2d(48),
-            nn.ReLU(),
-            nn.Dropout(0.1),
-        )
-
-        self.layer11 = nn.Sequential(
-            nn.Conv2d(48, 24, 3, padding=1),
-            nn.BatchNorm2d(24),
-            nn.ReLU(),
-            nn.Dropout(0.1),
-        )
-
-        self.layer12 = nn.Sequential(
-            nn.Conv2d(24, 10, 3),
+            nn.Conv2d(56, 32, 3),
         )
 
         self.gap = nn.AvgPool2d(4)
+
+        self.layer10 = nn.Conv2d(32, 10, 1)
 
     def forward(self, x):
         x = self.layer1(x)
@@ -97,9 +81,7 @@ class Net(nn.Module):
         x = self.layer7(x) + self.layer7_2(x)
         x = self.layer8(x)
         x = self.layer9(x)
-        x = self.layer10(x)
-        x = self.layer11(x)
-        x = self.layer12(x)
         x = self.gap(x)
+        x = self.layer10(x)
         x = x.view(-1, 10)
         return F.log_softmax(x)
