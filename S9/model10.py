@@ -88,3 +88,5 @@ class Net(nn.Module):
         x = self.conv9(x)
         x = self.conv10(x)
         x = self.gap(x)
+        x = x.view(-1, 10)
+        return F.log_softmax(x)
