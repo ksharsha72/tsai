@@ -20,11 +20,11 @@ class Net(nn.Module):
         )
 
         self.layer3 = nn.Sequential(
-            nn.Conv2d(64, 56, 3, stride=2, padding=2, padding_mode="reflect"),
+            nn.Conv2d(64, 56, 3, stride=2, padding=2),
         )
 
         self.layer4 = nn.Sequential(
-            nn.Conv2d(56, 168, 3, groups=56, padding_mode="reflect", padding=1),
+            nn.Conv2d(56, 168, 3, groups=56, padding=1),
             nn.BatchNorm2d(168),
             nn.ReLU(),
             nn.Dropout(0.1),
@@ -32,43 +32,43 @@ class Net(nn.Module):
         )
 
         self.layer5 = nn.Sequential(
-            nn.Conv2d(56, 64, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(56, 64, 3, padding=1),
             nn.BatchNorm2d(64),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
 
         self.layer6 = nn.Sequential(
-            nn.Conv2d(64, 24, 3, stride=2, padding=2, padding_mode="reflect"),
+            nn.Conv2d(64, 24, 3, stride=2, padding=2),
         )
 
         self.layer7 = nn.Sequential(
-            nn.Conv2d(24, 36, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(24, 36, 3, padding=1),
             nn.BatchNorm2d(36),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
 
         self.layer7_2 = nn.Sequential(
-            nn.Conv2d(24, 36, 3, dilation=2, padding=2, padding_mode="reflect"),
+            nn.Conv2d(24, 36, 3, dilation=2, padding=2),
             nn.BatchNorm2d(36),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
 
         self.layer8 = nn.Sequential(
-            nn.Conv2d(36, 56, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(36, 56, 3, padding=1),
             nn.BatchNorm2d(56),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
 
         self.layer9 = nn.Sequential(
-            nn.Conv2d(56, 32, 3, stride=2, padding=2, padding_mode="reflect"),
+            nn.Conv2d(56, 32, 3, stride=2, padding=2),
         )
 
         self.layer10 = nn.Sequential(
-            nn.Conv2d(32, 48, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(32, 48, 3, padding=1),
             nn.BatchNorm2d(48),
             nn.ReLU(),
             nn.Dropout(0.1),
