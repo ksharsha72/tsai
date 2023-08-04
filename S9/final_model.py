@@ -21,9 +21,6 @@ class Net(nn.Module):
 
         self.layer3 = nn.Sequential(
             nn.Conv2d(64, 56, 3, stride=2, padding=5, padding_mode="reflect"),
-            nn.BatchNorm2d(56),
-            nn.ReLU(),
-            nn.Dropout(0.1),
         )
 
         self.layer4 = nn.Sequential(
@@ -43,9 +40,6 @@ class Net(nn.Module):
 
         self.layer6 = nn.Sequential(
             nn.Conv2d(64, 24, 3, stride=2, padding=4, padding_mode="reflect"),
-            nn.BatchNorm2d(24),
-            nn.ReLU(),
-            nn.Dropout(0.1),
         )
 
         self.layer7 = nn.Sequential(
@@ -71,9 +65,6 @@ class Net(nn.Module):
 
         self.layer9 = nn.Sequential(
             nn.Conv2d(56, 32, 3, stride=2, padding=4, padding_mode="reflect"),
-            nn.BatchNorm2d(32),
-            nn.ReLU(),
-            nn.Dropout(0.1),
         )
 
         self.layer10 = nn.Sequential(
