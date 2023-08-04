@@ -82,12 +82,10 @@ class Net(nn.Module):
         )
 
         self.layer12 = nn.Sequential(
-            nn.Conv2d(24, 16, 3, stride=2),
+            nn.Conv2d(24, 10, 3),
         )
 
-        self.gap = nn.AvgPool2d(4)
-
-        self.fc = nn.Linear(16, 10)
+        self.gap = nn.AvgPool2d(7)
 
     def forward(self, x):
         x = self.layer1(x)
@@ -103,6 +101,5 @@ class Net(nn.Module):
         x = self.layer11(x)
         x = self.layer12(x)
         x = self.gap(x)
-        x = x.view(-1, 16)
-        x = self.fc(x)
+        x = x.view(-1, 10)
         return F.log_softmax(x)
