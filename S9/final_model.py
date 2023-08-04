@@ -19,36 +19,36 @@ class Net(nn.Module):
             nn.Dropout(0.1),
         )
         self.layer2_1 = nn.Sequential(
-            nn.Conv2d(32, 64, 3, groups=32, padding=1, padding_mode="reflect"),
+            nn.Conv2d(32, 64, 3, padding=1, padding_mode="reflect"),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
         )
 
         self.layer3 = nn.Sequential(
-            nn.Conv2d(64, 72, 3, stride=2),
-            nn.BatchNorm2d(72),
+            nn.Conv2d(64, 56, 3, stride=2),
+            nn.BatchNorm2d(56),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
 
         self.layer4 = nn.Sequential(
-            nn.Conv2d(72, 216, 3, groups=72, padding_mode="reflect", padding=1),
-            nn.BatchNorm2d(216),
+            nn.Conv2d(56, 168, 3, groups=56, padding_mode="reflect", padding=1),
+            nn.BatchNorm2d(168),
             nn.ReLU(),
             nn.Dropout(0.1),
-            nn.Conv2d(216, 56, 1),
+            nn.Conv2d(168, 56, 1),
         )
 
         self.layer5 = nn.Sequential(
-            nn.Conv2d(56, 72, 3, padding=1, padding_mode="reflect"),
-            nn.BatchNorm2d(72),
+            nn.Conv2d(56, 64, 3, padding=1, padding_mode="reflect"),
+            nn.BatchNorm2d(64),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
 
         self.layer6 = nn.Sequential(
-            nn.Conv2d(72, 24, 3, stride=2, padding=4, padding_mode="reflect"),
+            nn.Conv2d(64, 24, 3, stride=2, padding=4, padding_mode="reflect"),
             nn.BatchNorm2d(24),
             nn.ReLU(),
             nn.Dropout(0.1),
