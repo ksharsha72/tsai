@@ -74,7 +74,7 @@ class Net(nn.Module):
 
         self.conv10 = nn.Sequential(nn.Conv2d(24, 10, 3))
 
-        self.gap = nn.AvgPool2d(5)
+        self.gap = nn.AvgPool2d(6)
 
     def forward(self, x):
         x = self.conv1(x)
