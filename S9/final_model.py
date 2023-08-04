@@ -110,5 +110,5 @@ class Net(nn.Module):
         x = self.layer11(x)
         x = self.layer12(x)
         x = self.gap(x)
-        x = x.view(-1, 16)
+        x = x.view(-1, 10)
         return F.log_softmax(x)
