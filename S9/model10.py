@@ -59,20 +59,20 @@ class Net(nn.Module):
         )
 
         self.conv8 = nn.Sequential(
-            nn.Conv2d(32, 28, 3, padding=1),
-            nn.BatchNorm2d(28),
+            nn.Conv2d(32, 56, 3, padding=1),
+            nn.BatchNorm2d(6),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
 
         self.conv9 = nn.Sequential(
-            nn.Conv2d(28, 24, 3, padding=1),
-            nn.BatchNorm2d(24),
+            nn.Conv2d(56, 32, 3),
+            nn.BatchNorm2d(36),
             nn.ReLU(),
             nn.Dropout(0.1),
         )
 
-        self.conv10 = nn.Sequential(nn.Conv2d(24, 10, 3))
+        self.conv10 = nn.Sequential(nn.Conv2d(36, 10, 3))
 
         self.gap = nn.AvgPool2d(6)
 
