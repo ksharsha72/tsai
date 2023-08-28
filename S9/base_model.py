@@ -62,18 +62,18 @@ class BaseModel(nn.Module):
         )
 
         self.conv10 = nn.Sequential(
-            nn.Conv2d(48, 48, 3, groups=48, padding=1),
-            nn.Conv2d(48, 32, 1),
+            nn.Conv2d(48, 32, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
         )
 
         self.conv11 = nn.Sequential(
-            nn.Conv2d(32, 48, 3, padding=1),
-            # nn.ReLU(),
-            # nn.BatchNorm2d(48),
-            # nn.Dropout(0.1),
+            nn.Conv2d(32, 32, 3, groups=32, padding=1),
+            nn.Conv2d(32, 48, 1),
+            nn.ReLU(),
+            nn.BatchNorm2d(48),
+            nn.Dropout(0.1),
         )
 
         self.conv12 = nn.Sequential(
