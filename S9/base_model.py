@@ -74,8 +74,8 @@ class BaseModel(nn.Module):
             nn.Conv2d(36, 20, 3),
         )
 
-        self.out = nn.Conv2d(20, 10, 3)
-        self.gap = nn.AvgPool2d(4)
+        self.out = nn.Conv2d(20, 10, 1)
+        self.gap = nn.AvgPool2d(3)
 
     def forward(self, x):
         x = self.conv1(x)
