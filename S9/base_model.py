@@ -17,65 +17,65 @@ class BaseModel(nn.Module):
         )
 
         self.conv3 = nn.Sequential(
-            nn.Conv2d(64, 48, 3, stride=2, padding=4, padding_mode="reflect"),
+            nn.Conv2d(64, 48, 3, stride=2, padding=2),
         )
 
         self.conv4 = nn.Sequential(
-            nn.Conv2d(48, 56, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(48, 56, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(56),
             nn.Dropout(0.1),
         )
 
         self.conv5 = nn.Sequential(
-            nn.Conv2d(56, 64, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(56, 64, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
         )
 
         self.conv6 = nn.Sequential(
-            nn.Conv2d(64, 32, 3, stride=2, padding=2, padding_mode="reflect"),
+            nn.Conv2d(64, 32, 3, stride=2, padding=2),
         )
 
         self.conv7 = nn.Sequential(
-            nn.Conv2d(32, 24, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(32, 24, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(24),
             nn.Dropout(0.1),
         )
 
         self.conv8 = nn.Sequential(
-            nn.Conv2d(24, 48, 3, padding=1, padding_mode="reflect"),
+            nn.Conv2d(24, 48, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(48),
             nn.Dropout(0.1),
         )
 
         self.conv9 = nn.Sequential(
-            nn.Conv2d(48, 56, 3, stride=2, padding=4, padding_mode="reflect"),
+            nn.Conv2d(48, 56, 3, stride=2, padding=1),
         )
 
         self.conv10 = nn.Sequential(
-            nn.Conv2d(56, 32, 3, padding_mode="reflect", padding=1),
+            nn.Conv2d(56, 32, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
         )
 
         self.conv11 = nn.Sequential(
-            nn.Conv2d(32, 36, 3, padding_mode="reflect", padding=1),
+            nn.Conv2d(32, 36, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(36),
             nn.Dropout(0.1),
         )
 
         self.conv12 = nn.Sequential(
-            nn.Conv2d(36, 20, 3, padding_mode="reflect", padding=1),
+            nn.Conv2d(36, 20, 3),
         )
 
         self.out = nn.Conv2d(20, 10, 3)
-        self.gap = nn.AvgPool2d(6)
+        self.gap = nn.AvgPool2d(4)
 
     def forward(self, x):
         x = self.conv1(x)
