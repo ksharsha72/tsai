@@ -13,20 +13,20 @@ class Model(nn.Module):
             nn.BatchNorm2d(16),
             nn.Dropout(0.1),
         )
-        # self.layer2 = nn.Sequential(
-        #     nn.Conv2d(16, 24, 3),
-        #     nn.ReLU(),
-        #     nn.BatchNorm2d(24),
-        #     nn.Dropout(0.1),
-        # )
-        self.layer2_dil = nn.Sequential(
-            nn.Conv2d(16, 24, 3, padding=1, dilation=2),
+        self.layer2 = nn.Sequential(
+            nn.Conv2d(16, 24, 3),
             nn.ReLU(),
             nn.BatchNorm2d(24),
             nn.Dropout(0.1),
         )
+        self.layer3_dil = nn.Sequential(
+            nn.Conv2d(24, 32, 3, padding=1, dilation=2),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(0.1),
+        )
         self.layer3 = nn.Sequential(
-            nn.Conv2d(24, 32, 3, stride=2),
+            nn.Conv2d(24, 32, 3),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
@@ -50,7 +50,7 @@ class Model(nn.Module):
             nn.BatchNorm2d(48),
             nn.Dropout(0.1),
         )
-        self.layer6 = nn.Sequential(
+        self.layer7 = nn.Sequential(
             nn.Conv2d(48, 56, 3, stride=2, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(56),
@@ -65,7 +65,7 @@ class Model(nn.Module):
         )
 
         self.layer9 = nn.Sequential(
-            nn.Conv2d(64, 32, 3, padding=1),
+            nn.Conv2d(64, 32, 3, stride=2, padding=2),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
@@ -87,12 +87,12 @@ class Model(nn.Module):
 
     def forward(self, x):
         x = self.layer1(x)
-        x = self.layer2_dil(x)
-        x = self.layer3(x)
+        x = self.layer2(x)
+        x = self.layer3(x) + self.layer3_dil(x)
         x = self.layer4(x)
         x = self.layer5(x)
         x = self.dw_sep1(x)
-        x = self.layer6(x)
+        x = self.layer7(x)
         x = self.layer8(x)
         x = self.layer9(x)
         x = self.layer10(x)
