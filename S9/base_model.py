@@ -17,7 +17,7 @@ class BaseModel(nn.Module):
         )
 
         self.dil_conv2 = nn.Sequential(
-            nn.Conv2d(32, 64, 3, dilation=2, padding=1),
+            nn.Conv2d(32, 64, 3, dilation=2),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(0.1),
