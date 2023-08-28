@@ -45,10 +45,10 @@ class Model(nn.Module):
         )
         self.dw_sep1 = nn.Sequential(
             nn.Conv2d(72, 72, 3, groups=72, padding=2),
-            nn.ReLU(),
-            nn.BatchNorm2d(72),
-            nn.Dropout(0.1),
             nn.Conv2d(72, 48, 1),
+            nn.ReLU(),
+            nn.BatchNorm2d(48),
+            nn.Dropout(0.1),
         )
         self.layer6 = nn.Sequential(
             nn.Conv2d(48, 56, 3, stride=2, padding=1),
