@@ -16,12 +16,19 @@ class BaseModel(nn.Module):
             nn.Conv2d(32, 64, 3), nn.ReLU(), nn.BatchNorm2d(64), nn.Dropout(0.1)
         )
 
+        self.dil_conv2 = nn.Sequential(
+            nn.Conv2d(32, 64, 3, dilation=2, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout(0.1),
+        )
+
         self.conv3 = nn.Sequential(
-            nn.Conv2d(64, 48, 3, stride=2, padding=2),
+            nn.Conv2d(64, 44, 3, stride=2, padding=2),
         )
 
         self.conv4 = nn.Sequential(
-            nn.Conv2d(48, 56, 3, padding=1),
+            nn.Conv2d(44, 56, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(56),
             nn.Dropout(0.1),
@@ -46,18 +53,18 @@ class BaseModel(nn.Module):
         )
 
         self.conv8 = nn.Sequential(
-            nn.Conv2d(24, 48, 3, padding=1),
+            nn.Conv2d(24, 36, 3, padding=1),
             nn.ReLU(),
-            nn.BatchNorm2d(48),
+            nn.BatchNorm2d(36),
             nn.Dropout(0.1),
         )
 
         self.conv9 = nn.Sequential(
-            nn.Conv2d(48, 56, 3, stride=2, padding=1),
+            nn.Conv2d(36, 48, 3, stride=2, padding=1),
         )
 
         self.conv10 = nn.Sequential(
-            nn.Conv2d(56, 32, 3, padding=1),
+            nn.Conv2d(48, 32, 3, padding=1),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
@@ -79,7 +86,7 @@ class BaseModel(nn.Module):
 
     def forward(self, x):
         x = self.conv1(x)
-        x = self.conv2(x)
+        x = self.conv2(x) + self.dil_conv2(x)
         x = self.conv3(x)
         x = self.conv4(x)
         x = self.conv5(x)
