@@ -60,7 +60,8 @@ class BaseModel(nn.Module):
         )
 
         self.conv8 = nn.Sequential(
-            nn.Conv2d(24, 32, 3, padding=2),
+            nn.Conv2d(24, 24, 3, groups=24, padding=2),
+            nn.Conv2d(24, 32, 1),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(0.1),
@@ -92,10 +93,10 @@ class BaseModel(nn.Module):
             nn.Dropout(0.1),
         )
         self.conv12 = nn.Sequential(
-            nn.Conv2d(44, 32, 3), nn.ReLU(), nn.BatchNorm2d(32), nn.Dropout(0.1)
+            nn.Conv2d(44, 40, 3), nn.ReLU(), nn.BatchNorm2d(40), nn.Dropout(0.1)
         )
 
-        self.out = nn.Conv2d(32, 10, 1)
+        self.out = nn.Conv2d(40, 10, 1)
         self.gap = nn.AvgPool2d(5)
 
     def forward(self, x):
