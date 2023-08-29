@@ -38,8 +38,8 @@ train_transforms = A.Compose(
             mean=[0.49139968, 0.48215827, 0.44653124],
             std=[0.24703233, 0.24348505, 0.26158768],
         ),
-        A.HorizontalFlip(p=0.5),
-        A.ShiftScaleRotate(shift_limit=0.2, scale_limit=0.2, rotate_limit=5, p=0.5),
+        A.HorizontalFlip(p=0.2),
+        A.ShiftScaleRotate(shift_limit=0.1, scale_limit=0.1, rotate_limit=10, p=0.1),
         A.CoarseDropout(
             max_holes=1,
             max_height=16,
