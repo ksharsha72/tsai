@@ -9,7 +9,10 @@ class BaseModel(nn.Module):
         super(BaseModel, self).__init__(*args, **kwargs)
 
         self.conv1 = nn.Sequential(
-            nn.Conv2d(3, 32, 3), nn.ReLU(), nn.BatchNorm2d(32), nn.Dropout(0.1)
+            nn.Conv2d(3, 32, 3, padding=1),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(0.1),
         )
 
         self.conv2 = nn.Sequential(
@@ -51,12 +54,12 @@ class BaseModel(nn.Module):
         )
 
         self.conv6 = nn.Sequential(
-            nn.Conv2d(40, 72, 3, stride=2, padding=2),
+            nn.Conv2d(40, 70, 3, stride=2, padding=2),
         )
 
         self.conv7 = nn.Sequential(
-            nn.Conv2d(72, 72, 3, groups=72, padding=1),
-            nn.Conv2d(72, 48, 1),
+            nn.Conv2d(70, 70, 3, groups=70, padding=1),
+            nn.Conv2d(70, 48, 1),
             nn.ReLU(),
             nn.BatchNorm2d(48),
             nn.Dropout(0.1),
@@ -96,10 +99,10 @@ class BaseModel(nn.Module):
             nn.Dropout(0.1),
         )
         self.conv12 = nn.Sequential(
-            nn.Conv2d(46, 36, 3), nn.ReLU(), nn.BatchNorm2d(36), nn.Dropout(0.1)
+            nn.Conv2d(46, 40, 3), nn.ReLU(), nn.BatchNorm2d(40), nn.Dropout(0.1)
         )
 
-        self.out = nn.Conv2d(36, 10, 1)
+        self.out = nn.Conv2d(40, 10, 1)
         self.gap = nn.AvgPool2d(5)
 
     def forward(self, x):
