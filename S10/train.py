@@ -17,7 +17,7 @@ def train(
         if device != (None or "cpu"):
             data = data.to(device)
             target = target.to(device)
-        pred = model(data, target)
+        pred = model(data)
         loss = critireon(pred, target)
         loss.backward()
         optimizer.step()
