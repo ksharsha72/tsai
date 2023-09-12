@@ -4,8 +4,8 @@ from albumentations.pytorch import ToTensorV2
 import cv2
 import numpy as np
 
-mean = ([0.49139968, 0.48215827, 0.44653124],)
-std = ([0.24703233, 0.24348505, 0.26158768],)
+mean = [0.49139968, 0.48215827, 0.44653124]
+std = [0.24703233, 0.24348505, 0.26158768]
 
 train_transforms = A.Compose(
     [
@@ -36,7 +36,7 @@ class CustomLoader(Dataset):
         # image = self.data[index]
         # label = self.labels[index]
         image, label = self.dataset[index]
+        image = np.array(image)
         if self.transform:
-            image = np.array(image)
             image = self.transform(image=image)["image"]
         return image, label
