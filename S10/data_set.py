@@ -29,7 +29,7 @@ class CustomLoader(Dataset):
         self.dataset = dataset
 
     def __len__(self):
-        return len(self.labels)
+        return len(self.dataset)
 
     def __getitem__(self, index):
         # image = self.data[index]
