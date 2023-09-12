@@ -16,7 +16,7 @@ def test(model, device, test_loader, critireon, epoch):
                 data, target = data.to(device), target.to(device)
             output = model(data)
             # loss += F.nll_loss(output, target, reduction="sum").item()
-            loss += critireon(output, target, reduction="sum").item()
+            loss += critireon(output, target)
             pred = torch.argmax(output, dim=1)
             acc += (pred == target).sum().item()
         test_acc.append((acc / len(test_loader.dataset)) * 100)
