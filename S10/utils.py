@@ -15,6 +15,7 @@ incorrect_data = []
 original_target = []
 layer_weights = []
 layers = []
+lrs = []
 org_data = []
 classes = (
     "Airplane",

@@ -4,7 +4,9 @@ from utils import *
 batch_loss = []
 
 
-def train(train_loader, model, optimizer, loss, device, epoch, **kwargs):
+def train(
+    train_loader, model, optimizer, criterion, device, epoch, scheduler, **kwargs
+):
     model.train()
     pbar = tqdm(train_loader)
     acc = 0
@@ -16,10 +18,13 @@ def train(train_loader, model, optimizer, loss, device, epoch, **kwargs):
             data = data.to(device)
             target = target.to(device)
         pred = model(data, target)
-        loss = loss(pred, target)
+        loss = criterion(pred, target)
         loss.backward()
         optimizer.step()
+        scheduler.step()
+        lrs.append(get_lr(optimizer))
         pLabels = torch.argmax(pred, dim=1)
+
         acc += (pLabels == target).sum().item()
         processed += len(target)
         epoch_loss += loss.item()
