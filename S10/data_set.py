@@ -2,6 +2,7 @@ from torch.utils.data.dataset import Dataset
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 import cv2
+import numpy as np
 
 mean = ([0.49139968, 0.48215827, 0.44653124],)
 std = ([0.24703233, 0.24348505, 0.26158768],)
@@ -36,6 +37,6 @@ class CustomLoader(Dataset):
         # label = self.labels[index]
         image, label = self.dataset[index]
         if self.transform:
-            image = image.numpy()
+            image = np.array(image)
             image = self.transform(image)["image"]
         return image, label
