@@ -38,5 +38,5 @@ class CustomLoader(Dataset):
         image, label = self.dataset[index]
         if self.transform:
             image = np.array(image)
-            image = self.transform(image)["image"]
+            image = self.transform(image=image)["image"]
         return image, label
