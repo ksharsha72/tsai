@@ -35,7 +35,7 @@ class CustomResnet(nn.Module):
         )
 
         self.conv2 = nn.Sequential(
-            nn.Conv2d(128, 256, 3, padding=4),
+            nn.Conv2d(128, 256, 3, padding=1),
             nn.MaxPool2d(2),
             nn.BatchNorm2d(256),
             nn.ReLU(),
@@ -72,6 +72,6 @@ class CustomResnet(nn.Module):
         x_res2 = self.res2(x)
         x = x + x_res2
         x = self.pool4(x)
-        x = x.view(512, -1)
+        x = x.view(x.size(0), -1)
         x = self.fc(x)
         return x
