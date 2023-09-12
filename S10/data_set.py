@@ -17,7 +17,7 @@ train_transforms = A.Compose(
     ]
 )
 
-test_transforms = A.Compose(A.Normalize(mean=mean, std=std), ToTensorV2())
+test_transforms = A.Compose([A.Normalize(mean=mean, std=std), ToTensorV2()])
 
 
 class CustomLoader(Dataset):
