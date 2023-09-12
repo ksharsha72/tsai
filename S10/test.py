@@ -5,7 +5,7 @@ from utils import *
 from tqdm import tqdm
 
 
-def test(model, device, test_loader, criterion, epoch):
+def test(model, device, test_loader, critireon, epoch):
     model.eval()
     acc = 0
     loss = 0
@@ -16,7 +16,7 @@ def test(model, device, test_loader, criterion, epoch):
                 data, target = data.to(device), target.to(device)
             output = model(data)
             # loss += F.nll_loss(output, target, reduction="sum").item()
-            loss += criterion(output, target, reduction="sum").item()
+            loss += critireon(output, target, reduction="sum").item()
             pred = torch.argmax(output, dim=1)
             acc += (pred == target).sum().item()
         test_acc.append((acc / len(test_loader.dataset)) * 100)

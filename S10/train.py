@@ -5,7 +5,7 @@ batch_loss = []
 
 
 def train(
-    train_loader, model, optimizer, criterion, device, epoch, scheduler, **kwargs
+    train_loader, model, optimizer, critireon, device, epoch, scheduler, **kwargs
 ):
     model.train()
     pbar = tqdm(train_loader)
@@ -18,7 +18,7 @@ def train(
             data = data.to(device)
             target = target.to(device)
         pred = model(data, target)
-        loss = criterion(pred, target)
+        loss = critireon(pred, target)
         loss.backward()
         optimizer.step()
         scheduler.step()
