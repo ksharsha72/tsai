@@ -22,8 +22,6 @@ test_transforms = A.Compose([A.Normalize(mean=mean, std=std), ToTensorV2()])
 
 class CustomLoader(Dataset):
     def __init__(self, dataset, transforms=None) -> None:
-        super().__init__()
-
         if transforms != None:
             self.transform = transforms
         self.data = dataset.data
