@@ -24,16 +24,17 @@ class CustomLoader(Dataset):
     def __init__(self, dataset, transforms=None) -> None:
         if transforms != None:
             self.transform = transforms
-        self.data = dataset.data
-        self.labels = dataset.labels
+        # self.data = dataset.data
+        # self.labels = dataset.labels
         self.dataset = dataset
 
     def __len__(self):
         return len(self.labels)
 
     def __getitem__(self, index):
-        image = self.data[index]
-        label = self.labels[index]
+        # image = self.data[index]
+        # label = self.labels[index]
+        image, label = self.dataset[index]
         if self.transform:
             image = image.numpy()
             image = self.transform(image)["image"]
