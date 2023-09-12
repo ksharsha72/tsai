@@ -72,6 +72,6 @@ class CustomResnet(nn.Module):
         x_res2 = self.res2(x)
         x = x + x_res2
         x = self.pool4(x)
-        x = x.view(-1, 512 * 1 * 1)
+        x = x.view(512, -1)
         x = self.fc(x)
-        return F.log_softmax(x)
+        return x
