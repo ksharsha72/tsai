@@ -67,7 +67,7 @@ EPOCHS = 24
 
 
 def get_lr_finder(devcie, optimizer, critireon, train_loader):
-    model = ResNet().to(devcie)
+    model = ResNet18().to(devcie)
     lr_finder = LRFinder(model, optimizer, critireon, device="cuda")
     lr_finder.range_test(
         train_loader, end_lr=10, max_lr=10, num_iter=200, step_mode="exp"
