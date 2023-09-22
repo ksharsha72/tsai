@@ -29,9 +29,9 @@ test_transforms = A.Compose([A.Normalize(mean=mean, std=std), ToTensorV2()])
 
 
 class CustomDataSet(Dataset):
-    def __init__(self, dataset, transfrom=None) -> None:
+    def __init__(self, dataset, transform=None) -> None:
         self.data = dataset
-        self.transform = transfrom
+        self.transform = transform
 
     def __len__(self):
         return len(self.data)
