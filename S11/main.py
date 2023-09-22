@@ -5,12 +5,14 @@ from test import *
 
 from torchvision import datasets
 
-train_data = datasets.CIFAR10(
-    "../../data", train=True, download=True, transform=train_transfroms
+train_data = CustomDataSet(
+    datasets.CIFAR10("../../data", train=True, download=True),
+    transform=train_transfroms,
 )
 
-test_data = datasets.CIFAR10(
-    "../../data", train=False, download=True, transform=test_transforms
+test_data = CustomDataSet(
+    datasets.CIFAR10("../../data", train=False, download=True),
+    transform=test_transforms,
 )
 
 
