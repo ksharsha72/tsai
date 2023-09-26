@@ -43,7 +43,7 @@ def train(
         loss.backward()
         optimizer.step()
         scheduler.step()
-        lrs.append(get_lr["lr"])
+        lrs.append(get_lr(optimizer))
 
         pLabels = torch.argmax(pred, dim=1)
         batch_acc = (target == pLabels).sum().item()
