@@ -37,8 +37,9 @@ def train(
         if device != (None or "cpu"):
             data = data.to(device)
             target = target.to(device)
+
         pred = model(data)
-        loss = criterion(target, pred)
+        loss = criterion(pred, target)
         loss.backward()
         optimizer.step()
         scheduler.step()
