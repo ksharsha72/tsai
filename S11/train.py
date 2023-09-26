@@ -82,6 +82,7 @@ def get_scheduler(optimizer, train_loader, critireon, device):
     print("Heloooooooooooooooooooooooooooooooooo")
     print(type(len(train_loader)))
     print(len(train_loader))
+    print("Just before the max_lr finder")
     max_lr = (get_lr_finder(optimizer, train_loader, critireon, device),)
     print("The max lr is", max_lr)
     scheduler = OneCycleLR(
