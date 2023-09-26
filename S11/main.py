@@ -16,7 +16,7 @@ test_data = CustomDataSet(
 )
 
 
-batch_size = 512
+batch_size = 128
 
 kwargs = {
     "batch_size": batch_size,
