@@ -73,6 +73,8 @@ def get_lr_finder(optimizer, train_loader, critireon, device):
     lr_finder.range_test(train_loader, end_lr=10, num_iter=200, step_mode="exp")
     _, min_lr = lr_finder.plot(suggest_lr=True)
     lr_finder.reset()
+    print("This is the min_lr")
+    print(min_lr)
     return min_lr
 
 
