@@ -43,7 +43,7 @@ def test_model(model, device, test_loader, criterion, epoch):
             torch.save(model.state_dict(), "./best_model.pth")
 
             incorrect_preds.append(
-                pred[torch.where(~(pLabels == target))[0].cpu().numpy()]
+                pLabels[torch.where(~(pLabels == target))[0].cpu().numpy()]
             )
 
             original_target.append(

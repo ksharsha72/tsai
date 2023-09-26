@@ -58,6 +58,7 @@ def get_lr(optimizer):
 def wrong_predictions(model):
     fig = plt.figure()
     ax = fig.subplots(2, 5)
+    print(len(incorrect_data))
     for i in range(2):
         for j in range(5):
             np_img = incorrect_data[i + j][0]
