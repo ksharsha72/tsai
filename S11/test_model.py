@@ -41,6 +41,7 @@ def test_model(model, device, test_loader, criterion, epoch):
         if test_acc[-1] >= sorted(test_acc)[-1]:
             global incorrect_preds, incorrect_data, original_target
             torch.save(model.state_dict(), "./best_model.pth")
+
             incorrect_preds.append(
                 pred[torch.where(~(pred == target))[0].cpu().numpy()]
             )
