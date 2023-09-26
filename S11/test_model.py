@@ -7,6 +7,9 @@ from tqdm import tqdm
 
 test_acc = []
 test_loss = []
+incorrect_preds = []
+incorrect_data = []
+original_target = []
 
 
 def test_model(model, device, test_loader, criterion, epoch):
