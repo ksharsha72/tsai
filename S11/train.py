@@ -72,23 +72,15 @@ def get_lr_finder(optimizer, train_loader, critireon, device):
     lr_finder.range_test(train_loader, end_lr=10, num_iter=200, step_mode="exp")
     _, min_lr = lr_finder.plot(suggest_lr=True)
     lr_finder.reset()
-    print("********************************")
-    print(min_lr)
     return min_lr
 
 
 def get_scheduler(optimizer, train_loader, critireon, device):
-    print("&&&&&&&&&&&&&&&&&&&&")
-    print("Heloooooooooooooooooooooooooooooooooo")
-    print(type(len(train_loader)))
-    print(len(train_loader))
-    print("Just before the max_lr finder")
-    max_lr = (get_lr_finder(optimizer, train_loader, critireon, device),)
-    print("The max lr is", max_lr)
     scheduler = OneCycleLR(
         optimizer=optimizer,
         max_lr=get_lr_finder(optimizer, train_loader, critireon, device),
         steps_per_epoch=len(train_loader),
+        epochs=EPOCHS,
         pct_start=3 / EPOCHS,
         div_factor=100,
         three_phase=False,
