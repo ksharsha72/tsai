@@ -9,7 +9,7 @@ test_acc = []
 test_loss = []
 
 
-def test(model, device, test_loader, criterion, epoch):
+def test_model(model, device, test_loader, criterion, epoch):
     model.eval()
     pbar = tqdm(test_loader)
     processed = 0
