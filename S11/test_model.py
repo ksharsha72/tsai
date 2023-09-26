@@ -43,11 +43,13 @@ def test_model(model, device, test_loader, criterion, epoch):
             torch.save(model.state_dict(), "./best_model.pth")
 
             incorrect_preds.append(
-                pred[torch.where(~(pred == target))[0].cpu().numpy()]
+                pred[torch.where(~(pLabels == target))[0].cpu().numpy()]
             )
 
             original_target.append(
-                target[torch.where(~(pred == target))[0].cpu().numpy()]
+                target[torch.where(~(pLabels == target))[0].cpu().numpy()]
             )
-            incorrect_data.append(data[torch.where(~(pred == target))[0]].cpu().numpy())
+            incorrect_data.append(
+                data[torch.where(~(pLabels == target))[0]].cpu().numpy()
+            )
         print("The Test Accuracy is", test_acc[epoch - 1])
