@@ -1,7 +1,7 @@
 import torch
 from torchsummary import summary
 import matplotlib.pyplot as plt
-from test import *
+from test_model import *
 import numpy as np
 from math import floor, ceil
 import torch.nn as nn
@@ -21,9 +21,6 @@ import cv2
 from data_set import *
 
 
-incorrect_data = []
-incorrect_preds = []
-original_target = []
 classes = (
     "Airplane",
     "Automobile",
