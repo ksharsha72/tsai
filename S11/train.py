@@ -35,7 +35,7 @@ def train(
         epoch_batch_loss[epoch][batch_idx] = []
 
         if device != (None or "cpu"):
-            data = (data.to(device),)
+            data = data.to(device)
             target = target.to(device)
         pred = model(data)
         loss = criterion(target, pred)
