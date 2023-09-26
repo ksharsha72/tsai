@@ -85,9 +85,9 @@ def get_scheduler(optimizer, train_loader, critireon, device):
         steps_per_epoch=len(train_loader),
         epochs=EPOCHS,
         pct_start=3 / EPOCHS,
-        div_factor=1000,
+        div_factor=500,
         three_phase=False,
-        final_div_factor=1000,
+        final_div_factor=500,
         anneal_strategy="linear",
     )
     return scheduler
