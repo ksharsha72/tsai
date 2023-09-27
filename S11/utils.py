@@ -68,7 +68,7 @@ def wrong_predictions(model):
             fig.show()
             fig.tight_layout()
             plt.tight_layout()
-            rgb_img = test_transforms(np_trans)
+            rgb_img = test_transforms(image=np_trans)["image"]
             show_grad_cam_image(model, np_trans, rgb_img)
 
 
