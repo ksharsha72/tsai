@@ -68,7 +68,7 @@ def wrong_predictions(model):
             fig.show()
             fig.tight_layout()
             plt.tight_layout()
-            tens = torch.from_numpy(np_trans)
+            tens = torch.from_numpy(np_img)
             rgb_img = test_transforms(image=np_trans)["image"]
             show_grad_cam_image(model, tens, rgb_img)
 
