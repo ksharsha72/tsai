@@ -102,7 +102,7 @@ def plot_kernels(model):
 def show_grad_cam_image(model, input_tesnor, rgb_img):
     target_layers = [model.layer3[-1]]
     cam = GradCAM(model=model, target_layers=target_layers, use_cuda=True)
-    targets = [ClassifierOutputTarget(10)]
+    targets = [ClassifierOutputTarget(9)]
     grayscale_cam = cam(input_tensor=input_tesnor, targets=targets)
     grayscale_cam = grayscale_cam[0, :]
     visualization = show_cam_on_image(rgb_img, grayscale_cam, use_rgb=True)
