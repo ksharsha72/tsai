@@ -71,6 +71,7 @@ def wrong_predictions(model):
             tens = torch.from_numpy(np_img)
             tens = tens.unsqueeze(dim=0)
             rgb_img = test_transforms(image=np_trans)["image"]
+            rgb_img = np.transpose(rgb_img, (1, 2, 0))
             show_grad_cam_image(model, tens, rgb_img)
 
 
