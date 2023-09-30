@@ -115,6 +115,7 @@ def show_grad_cam_image(model, input_tesnor, rgb_img):
     visualization = show_cam_on_image(rgb_img, grayscale_cam, use_rgb=True)
     print(type(visualization))
     print(visualization.shape)
+    visualization = visualization * 255
     visuals.append(visualization)
 
 
