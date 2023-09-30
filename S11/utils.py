@@ -35,6 +35,8 @@ classes = (
     "truck",
 )
 
+visuals = []
+
 
 def get_summary(model, set_device=False, input_size=(3, 32, 32)):
     device = None
@@ -110,8 +112,9 @@ def show_grad_cam_image(model, input_tesnor, rgb_img):
     grayscale_cam = cam(input_tensor=input_tesnor, targets=targets)
     grayscale_cam = grayscale_cam[0, :]
     visualization = show_cam_on_image(rgb_img, grayscale_cam, use_rgb=True)
-    img = Image.fromarray(visualization)
-    img.show()
+    print(type(visualization))
+    print(visualization.shape)
+    visuals.append(visualization)
 
 
 def show_imgs(imgs, labels):
