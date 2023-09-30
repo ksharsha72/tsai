@@ -78,6 +78,7 @@ def wrong_predictions(model):
             print(type(rgb_img))
             rgb_img = rgb_img.detach().cpu().numpy()
             rgb_img = (rgb_img / 2) + 0.5
+            rgb_img = rgb_img * 255
             show_grad_cam_image(model, tens, rgb_img)
 
 
@@ -115,7 +116,6 @@ def show_grad_cam_image(model, input_tesnor, rgb_img):
     visualization = show_cam_on_image(rgb_img, grayscale_cam, use_rgb=True)
     print(type(visualization))
     print(visualization.shape)
-    visualization = visualization * 255
     visuals.append(visualization)
 
 
