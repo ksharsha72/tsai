@@ -73,6 +73,7 @@ def wrong_predictions(model):
             rgb_img = test_transforms(image=np_trans)["image"]
             rgb_img = np.transpose(rgb_img, (1, 2, 0))
             print(type(rgb_img))
+            rgb_img = rgb_img.detach().cpu().numpy()
             show_grad_cam_image(model, tens, rgb_img)
 
 
