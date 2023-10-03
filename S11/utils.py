@@ -71,7 +71,7 @@ def wrong_predictions(model):
             fig.show()
             fig.tight_layout()
             plt.tight_layout()
-            tens = torch.from_numpy(np_img)
+            tens = torch.from_numpy(np_trans)
             tens = tens.unsqueeze(dim=0)
             rgb_img = test_transforms(image=np_trans)["image"]
             rgb_img = np.transpose(rgb_img, (1, 2, 0))
@@ -108,6 +108,7 @@ def plot_kernels(model):
 
 
 def show_grad_cam_image(model, input_tesnor, rgb_img):
+    print(model.layer3[-1])
     target_layers = [model.layer3[-1]]
     cam = GradCAM(model=model, target_layers=target_layers, use_cuda=True)
     targets = [ClassifierOutputTarget(9)]
