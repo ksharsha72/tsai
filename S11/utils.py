@@ -77,8 +77,7 @@ def wrong_predictions(model):
             rgb_img = np.transpose(rgb_img, (1, 2, 0))
             print(type(rgb_img))
             rgb_img = rgb_img.detach().cpu().numpy()
-            rgb_img = (rgb_img / 2) + 0.5
-            rgb_img = rgb_img * 255
+            rgb_img = (rgb_img * 2) + 0.5
             show_grad_cam_image(model, tens, rgb_img)
 
 
