@@ -62,7 +62,6 @@ def wrong_predictions(model):
     for i in range(2):
         for j in range(5):
             np_img = incorrect_data[i + j][0]
-            print(np_img.shape)
             np_trans = np.transpose(np_img, (1, 2, 0))
             ax[i][j].imshow(np_trans)
             ax[i][j].set_xlabel(
@@ -71,9 +70,13 @@ def wrong_predictions(model):
             fig.show()
             fig.tight_layout()
             plt.tight_layout()
-            tens = torch.from_numpy(np_trans)
+            tens = torch.from_numpy(np_img)
             tens = tens.unsqueeze(dim=0)
+            print("before transforms")
+            print(np_trans.shape)
             rgb_img = test_transforms(image=np_trans)["image"]
+            print("after  transfroms")
+            print(rgb_img.shape)
             rgb_img = np.transpose(rgb_img, (1, 2, 0))
             print(type(rgb_img))
             rgb_img = rgb_img / 2 + 0.5
