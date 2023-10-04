@@ -20,6 +20,12 @@ from pytorch_grad_cam.utils.image import show_cam_on_image
 import cv2
 from data_set import *
 from PIL import Image
+from torchvision.transforms import transforms
+
+inv_normalize = transforms.Normalize(
+    mean=[-0.485 / 0.229, -0.456 / 0.224, -0.406 / 0.225],
+    std=[1 / 0.229, 1 / 0.224, 1 / 0.225],
+)
 
 
 classes = (
@@ -82,8 +88,10 @@ def wrong_predictions(model):
             # rgb_img = rgb_img / 2 + 0.5
             # rgb_img = rgb_img.detach().cpu().numpy()
             # rgb_img = (rgb_img / 2) + 0.5
-            rgb_img = np_trans / 255
+            # rgb_img = np_trans / 255
             # rgb_img = rgb_img / 2 + 0.5
+            inv_tensor = inv_normalize(tens).detach().cpu().numpy()
+            rgb_img = np.transpose(inv_tensor, (1, 2, 0))
             show_grad_cam_image(model, tens, rgb_img)
 
 

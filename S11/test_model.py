@@ -10,6 +10,7 @@ test_loss = []
 incorrect_preds = []
 incorrect_data = []
 original_target = []
+data_without_transforms = []
 
 
 def test_model(model, device, test_loader, criterion, epoch):
