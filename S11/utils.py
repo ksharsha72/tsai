@@ -28,6 +28,7 @@ import albumentations as A
 inv_normalize = A.Normalize(
     mean=[-0.485 * 0.229, -0.456 * 0.224, -0.406 * 0.225],
     std=[1 / 0.229, 1 / 0.224, 1 / 0.225],
+
 )
 
 
@@ -97,7 +98,8 @@ def wrong_predictions(model):
             tens= tens.squeeze(dim=0).detach().cpu().numpy()
             print("before applying the normalization")
             print(tens.shape)
-            inv_tensor = inv_normalize.apply(image=tens)["image"]
+            np_image = np.transpose(tens,(1,2,0))
+            inv_tensor = inv_normalize.apply(image=np_image)["image"]
             rgb_img = np.transpose(inv_tensor, (1, 2, 0))
             show_grad_cam_image(model, tens, rgb_img)
 
