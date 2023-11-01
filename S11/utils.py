@@ -99,7 +99,9 @@ def wrong_predictions(model):
             print("before applying the normalization")
             print(tens.shape)
             np_image = np.transpose(tens,(1,2,0))
-            inv_tensor = inv_normalize.apply(image=np_image)["image"]
+            print("the np_image shape is ",np_image.shape)
+            print("the np_imge indices",np_image.__index__)
+            inv_tensor = inv_normalize(image=np_image)["image"]
             rgb_img = np.transpose(inv_tensor, (1, 2, 0))
             show_grad_cam_image(model, tens, rgb_img)
 
