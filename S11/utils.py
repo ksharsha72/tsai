@@ -98,12 +98,13 @@ def wrong_predictions(model):
             ni = tens.squeeze(dim=0).detach().cpu().numpy()
             print("before applying the normalization")
             print(ni.shape)
-            # np_image = np.transpose(ni,(1,2,0))
-            np_image = ni
+            np_image = np.transpose(ni,(1,2,0))
+            # np_image = ni
             print("the np_image shape is ",np_image.shape)
             # print("the np_imge indices",np_image.__index__)
             inv_tensor = inv_normalize(image=np_image)["image"]
-            rgb_img = np.transpose(inv_tensor, (1, 2, 0))
+            # rgb_img = np.transpose(inv_tensor, (1, 2, 0))
+            rgb_img = inv_tensor
             show_grad_cam_image(model, tens, rgb_img)
 
 
