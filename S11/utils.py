@@ -83,6 +83,7 @@ def wrong_predictions(model):
             tens = tens.unsqueeze(dim=0)
             print("before transforms")
             print(np_trans.shape)
+            print(tens.shape)
             # rgb_img = test_transforms(image=np_trans)["image"]
             # print("after  transfroms")
             # print(rgb_img.shape)
