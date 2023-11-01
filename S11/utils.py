@@ -94,7 +94,10 @@ def wrong_predictions(model):
             # rgb_img = (rgb_img / 2) + 0.5
             # rgb_img = np_trans / 255
             # rgb_img = rgb_img / 2 + 0.5
-            inv_tensor = inv_normalize(image=tens.squeeze(dim=0).detach().cpu().numpy())["image"]
+            tens= tens.squeeze(dim=0).detach().cpu().numpy()
+            print("before applying the normalization")
+            print(tens.shape)
+            inv_tensor = inv_normalize(image=tens)["image"]
             rgb_img = np.transpose(inv_tensor, (1, 2, 0))
             show_grad_cam_image(model, tens, rgb_img)
 
