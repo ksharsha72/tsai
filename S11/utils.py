@@ -46,6 +46,7 @@ classes = (
 )
 
 visuals = []
+in_grad_cam_imgs = []
 
 
 def get_summary(model, set_device=False, input_size=(3, 32, 32)):
@@ -80,32 +81,8 @@ def wrong_predictions(model):
             fig.show()
             fig.tight_layout()
             plt.tight_layout()
-            tens = torch.from_numpy(np_img)
-            tens = tens.unsqueeze(dim=0)
-            print("before transforms")
-            print(np_trans.shape)
-            print(tens.shape)
-            # rgb_img = test_transforms(image=np_trans)["image"]
-            # print("after  transfroms")
-            # print(rgb_img.shape)
-            # rgb_img = np.transpose(rgb_img, (1, 2, 0))
-            # print(type(rgb_img))
-            # rgb_img = rgb_img / 2 + 0.5
-            # rgb_img = rgb_img.detach().cpu().numpy()
-            # rgb_img = (rgb_img / 2) + 0.5
-            # rgb_img = np_trans / 255
-            # rgb_img = rgb_img / 2 + 0.5
-            ni = tens.squeeze(dim=0).detach().cpu().numpy()
-            print("before applying the normalization")
-            print(ni.shape)
-            np_image = np.transpose(ni,(1,2,0))
-            # np_image = ni
-            print("the np_image shape is ",np_image.shape)
-            # print("the np_imge indices",np_image.__index__)
-            inv_tensor = inv_normalize(image=np_image)["image"]
-            # rgb_img = np.transpose(inv_tensor, (1, 2, 0))
-            rgb_img = inv_tensor
-            show_grad_cam_image(model, tens, rgb_img)
+            in_grad_cam_imgs.append(np_img)
+           
 
 
 def show_kernels(param, kernel_size):
@@ -166,3 +143,40 @@ def show_imgs(imgs, labels):
                 right=False,
             )
             val = val + 1
+
+def show_grad_cam_imgs(model):
+    for img in in_grad_cam_imgs:
+        np_img = img
+        np_trans = np.transpose(np_img, (1, 2, 0))
+        tens = torch.from_numpy(np_img)
+        inv_tensor = inv_normalize(image=img)["image"]
+        inv_img = np.transpose(inv_tensor,(1,2,0))
+        rgb_img = inv_tensor
+        show_grad_cam_image(model, tens, rgb_img)
+
+
+
+        # tens = tens.unsqueeze(dim=0)
+        # print("before transforms")
+        # print(np_trans.shape)
+        # print(tens.shape)
+        # rgb_img = test_transforms(image=np_trans)["image"]
+        # print("after  transfroms")
+        # print(rgb_img.shape)
+        # rgb_img = np.transpose(rgb_img, (1, 2, 0))
+        # print(type(rgb_img))
+        # rgb_img = rgb_img / 2 + 0.5
+        # rgb_img = rgb_img.detach().cpu().numpy()
+        # rgb_img = (rgb_img / 2) + 0.5
+        # rgb_img = np_trans / 255
+        # rgb_img = rgb_img / 2 + 0.5
+        # ni = tens.squeeze(dim=0).detach().cpu().numpy()
+        # print("before applying the normalization")
+        # print(ni.shape)
+        # np_image = np.transpose(ni,(1,2,0))
+        # np_image = ni
+        # print("the np_image shape is ",np_image.shape)
+        # print("the np_imge indices",np_image.__index__)
+    
+        # rgb_img = np.transpose(inv_tensor, (1, 2, 0))
+        
