@@ -38,8 +38,11 @@ class CustomDataSet(Dataset):
 
     def __getitem__(self, index):
         image, label = self.data[index]
+        print(f"the type of image is {type(image)}")
+        print(f"the image shape is {image.shape}")
         image = np.array(image)
-        print("during applying the transforms",image.shape)
+        print(f"the type of image after converting {type(image)}")
+        print(f"the shape of image after converitng {image.shape}")
 
         if self.transform is not None:
             image = self.transform(image=image)["image"]
