@@ -40,12 +40,14 @@ class CustomDataSet(Dataset):
         image, label = self.data[index]
         print("----------------------------------------------------------")
         print(f"the type of image is {type(image)}")
-        print(f"the image shape is {image.shape}")
+        # print(f"the image shape is {image.shape}")
         image = np.array(image)
         print(f"the type of image after converting {type(image)}")
         print(f"the shape of image after converitng {image.shape}")
 
         if self.transform is not None:
             image = self.transform(image=image)["image"]
+            print("transformed image type is", type(image))
+            print("transformed image shape",image.shape)
 
         return image, label
