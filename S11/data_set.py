@@ -38,6 +38,7 @@ class CustomDataSet(Dataset):
 
     def __getitem__(self, index):
         image, label = self.data[index]
+        print("----------------------------------------------------------")
         print(f"the type of image is {type(image)}")
         print(f"the image shape is {image.shape}")
         image = np.array(image)
