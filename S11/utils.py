@@ -73,7 +73,7 @@ def wrong_predictions(model):
     for i in range(2):
         for j in range(5):
             np_img = incorrect_data[i + j][0]
-            print("the type of np_img is ",type(np_img))
+            print("the type of np_img is ",type(np_img),np_img.shape)
             np_trans = np.transpose(np_img, (1, 2, 0))
             ax[i][j].imshow(np_trans)
             ax[i][j].set_xlabel(
