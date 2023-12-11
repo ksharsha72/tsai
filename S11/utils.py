@@ -25,11 +25,11 @@ import albumentations as A
 
 
 
-inv_normalize = A.Normalize(
+inv_normalize = A.Compose([A.Normalize(
     mean=[-0.485 * 0.229, -0.456 * 0.224, -0.406 * 0.225],
     std=[1 / 0.229, 1 / 0.224, 1 / 0.225],
 
-)
+), ToTensorV2()])
 
 
 classes = (
@@ -150,7 +150,7 @@ def show_grad_cam_imgs(model):
         np_img = img
         np_trans = np.transpose(np_img, (1, 2, 0))
         tens = torch.from_numpy(np_img)
-        inv_tensor = inv_normalize(image=img)["image"]
+        inv_tensor = inv_normalize(image=np_img)["image"]
         inv_img = np.transpose(inv_tensor,(1,2,0))
         rgb_img = inv_tensor
         show_grad_cam_image(model, tens, rgb_img)
