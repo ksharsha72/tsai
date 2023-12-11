@@ -154,6 +154,9 @@ def show_grad_cam_imgs(model):
         inv_img = np.transpose(inv_tensor,(1,2,0))
         tens = torch.from_numpy(inv_tensor)
         rgb_img = inv_tensor
+        tens = tens.squeeze(dim=0).detach().cpu().numpy()
+        tens = torch.from_numpy(np.transpose(tens,2,0,1))
+
         show_grad_cam_image(model, tens, rgb_img)
 
 
